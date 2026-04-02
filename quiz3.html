@@ -1,0 +1,1234 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Computer Networks Quiz - Part 3</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* نفس الـ CSS الموجود في quiz1.html */
+      :root {
+        --navy: #0d1b2a;
+        --navy2: #1b2d42;
+        --teal: #00c9a7;
+        --teal-dim: rgba(0, 201, 167, 0.12);
+        --red: #ff4d6d;
+        --red-dim: rgba(255, 77, 109, 0.12);
+        --gold: #f5a623;
+        --white: #f0f4f8;
+        --muted: #8899aa;
+        --card: #162032;
+        --border: rgba(255, 255, 255, 0.07);
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: var(--navy);
+        color: var(--white);
+        font-family: "DM Sans", sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(0, 201, 167, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 201, 167, 0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .wrapper {
+        position: relative;
+        z-index: 1;
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 4rem;
+      }
+
+      .nav-bar {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 60px;
+        padding: 0.5rem;
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+      .nav-btn {
+        background: transparent;
+        border: none;
+        color: var(--muted);
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 10px 24px;
+        border-radius: 40px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .nav-btn.active {
+        background: var(--teal);
+        color: var(--navy);
+      }
+      .nav-btn:hover:not(.active) {
+        background: rgba(0, 201, 167, 0.15);
+        color: var(--teal);
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .badge-top {
+        display: inline-block;
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--teal);
+        border: 1px solid var(--teal);
+        border-radius: 20px;
+        padding: 5px 16px;
+        margin-bottom: 1.2rem;
+      }
+      h1 {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 0.6rem;
+      }
+      h1 span {
+        color: var(--teal);
+      }
+      .subtitle {
+        color: var(--muted);
+        font-size: 15px;
+        font-weight: 300;
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+      .timer-box {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 40px;
+        padding: 8px 20px;
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 1.2rem;
+      }
+      .timer-box span {
+        color: var(--teal);
+      }
+      .btn-export {
+        background: transparent;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        border-radius: 40px;
+        padding: 8px 20px;
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-export:hover {
+        background: var(--gold);
+        color: var(--navy);
+      }
+
+      .scoreboard {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .score-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1rem 1.2rem;
+        text-align: center;
+      }
+      .score-card .label {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      .score-card .val {
+        font-family: "Syne", sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+      }
+      .score-card.correct .val {
+        color: var(--teal);
+      }
+      .score-card.wrong .val {
+        color: var(--red);
+      }
+      .score-card.total .val {
+        color: var(--gold);
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin: 2.5rem 0 1rem;
+      }
+      .section-title::before,
+      .section-title::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--teal);
+        opacity: 0.25;
+      }
+
+      .q-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        margin-bottom: 1.2rem;
+        overflow: hidden;
+        transition: border-color 0.3s;
+      }
+      .q-card.answered-correct {
+        border-color: rgba(0, 201, 167, 0.4);
+      }
+      .q-card.answered-wrong {
+        border-color: rgba(255, 77, 109, 0.3);
+      }
+
+      .q-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 1rem 1.2rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .q-num {
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--teal);
+        background: var(--teal-dim);
+        border-radius: 8px;
+        padding: 4px 10px;
+        white-space: nowrap;
+        margin-top: 2px;
+        flex-shrink: 0;
+      }
+      .q-text {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.5;
+        color: var(--white);
+      }
+
+      .options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+      .opt {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px 16px;
+        border-top: 1px solid var(--border);
+        cursor: pointer;
+        transition: background 0.2s;
+        font-size: 13.5px;
+        color: #b0c0d0;
+        user-select: none;
+      }
+      .opt:nth-child(odd) {
+        border-right: 1px solid var(--border);
+      }
+      .opt:hover {
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .opt.selected {
+        background: rgba(0, 201, 167, 0.08);
+        color: var(--white);
+      }
+      .opt.revealed-correct {
+        background: var(--teal-dim) !important;
+        color: var(--teal) !important;
+      }
+      .opt.revealed-wrong {
+        background: var(--red-dim) !important;
+        color: var(--red) !important;
+      }
+      .opt.dimmed {
+        opacity: 0.4;
+      }
+
+      .opt-circle {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Syne", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        flex-shrink: 0;
+        transition: all 0.2s;
+      }
+      .opt.selected .opt-circle {
+        border-color: var(--teal);
+        color: var(--teal);
+      }
+      .opt.revealed-correct .opt-circle {
+        background: var(--teal);
+        border-color: var(--teal);
+        color: var(--navy);
+      }
+      .opt.revealed-wrong .opt-circle {
+        background: var(--red);
+        border-color: var(--red);
+        color: #fff;
+      }
+
+      .q-feedback {
+        display: none;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        border-top: 1px solid var(--border);
+      }
+      .q-feedback.show {
+        display: flex;
+      }
+      .q-feedback.ok {
+        color: var(--teal);
+      }
+      .q-feedback.err {
+        color: var(--red);
+      }
+      .q-feedback .icon {
+        font-size: 16px;
+      }
+
+      .q-footer {
+        padding: 10px 16px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: flex-end;
+      }
+      .btn-submit {
+        background: var(--teal);
+        color: var(--navy);
+        border: none;
+        border-radius: 10px;
+        padding: 8px 22px;
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition:
+          opacity 0.2s,
+          transform 0.1s;
+      }
+      .btn-submit:hover {
+        opacity: 0.85;
+      }
+      .btn-submit:active {
+        transform: scale(0.97);
+      }
+      .btn-submit:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      #final-result {
+        display: none;
+        background: var(--card);
+        border: 1px solid var(--teal);
+        border-radius: 20px;
+        padding: 2.5rem;
+        text-align: center;
+        margin-top: 2rem;
+      }
+      #final-result h2 {
+        font-family: "Syne", sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+      }
+      #final-result p {
+        color: var(--muted);
+        margin-bottom: 1.5rem;
+      }
+      .big-score {
+        font-family: "Syne", sans-serif;
+        font-size: 4rem;
+        font-weight: 800;
+        color: var(--teal);
+        line-height: 1;
+      }
+      .grade-label {
+        font-size: 14px;
+        color: var(--gold);
+        margin-top: 0.5rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .btn-reset {
+        margin-top: 1.5rem;
+        background: transparent;
+        color: var(--teal);
+        border: 1.5px solid var(--teal);
+        border-radius: 12px;
+        padding: 10px 30px;
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .btn-reset:hover {
+        background: var(--teal);
+        color: var(--navy);
+      }
+
+      .progress-bar-wrap {
+        height: 4px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 2px;
+        margin-bottom: 2rem;
+        overflow: hidden;
+      }
+      .progress-bar-fill {
+        height: 100%;
+        background: var(--teal);
+        border-radius: 2px;
+        transition: width 0.4s ease;
+        width: 0%;
+      }
+
+      @media (max-width: 560px) {
+        .options {
+          grid-template-columns: 1fr;
+        }
+        .opt:nth-child(odd) {
+          border-right: none;
+        }
+        .scoreboard {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0.5rem;
+        }
+        .score-card .val {
+          font-size: 1.5rem;
+        }
+        .top-bar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .timer-box,
+        .btn-export {
+          text-align: center;
+          justify-content: center;
+        }
+        .nav-bar {
+          border-radius: 20px;
+        }
+        .nav-btn {
+          padding: 8px 16px;
+          font-size: 11px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="nav-bar">
+        <a href="quiz1.html" class="nav-btn">📚 Part 1: Fundamentals</a>
+        <a href="quiz2.html" class="nav-btn">🖥️ Part 2: Devices & Media</a>
+        <a href="quiz3.html" class="nav-btn active"
+          >🌐 Part 3: Types & Architectures</a
+        >
+      </div>
+
+      <header>
+        <div class="badge-top">Lecture 3 · Computer Networks</div>
+        <h1>Network <span>Quiz</span></h1>
+        <p class="subtitle">
+          Part 3: Network Types & Architectures · Select all correct answers ·
+          then confirm
+        </p>
+      </header>
+
+      <div class="top-bar">
+        <div class="timer-box">⏱️ <span id="timer-display">30:00</span></div>
+        <button class="btn-export" id="export-btn">📎 Export Results</button>
+      </div>
+
+      <div class="scoreboard">
+        <div class="score-card correct">
+          <div class="label">Correct</div>
+          <div class="val" id="sc-correct">0</div>
+        </div>
+        <div class="score-card wrong">
+          <div class="label">Wrong</div>
+          <div class="val" id="sc-wrong">0</div>
+        </div>
+        <div class="score-card total">
+          <div class="label">Score</div>
+          <div class="val" id="sc-score">0%</div>
+        </div>
+      </div>
+
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-bar"></div>
+      </div>
+
+      <div id="quiz-container"></div>
+      <div id="final-result">
+        <h2>Quiz Complete 🎉</h2>
+        <p>Here's how you did</p>
+        <div class="big-score" id="final-pct">0%</div>
+        <div class="grade-label" id="final-grade">—</div>
+        <br />
+        <button class="btn-reset" id="reset-btn">↺ Try Again</button>
+      </div>
+    </div>
+
+    <script>
+      // ============================================
+      // PART 3: Network Types and Architectures - 30 Questions
+      // ============================================
+      const questions = [
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "Which network architecture treats all connected computers as equals, with no central server?",
+          opts: [
+            "Client-Server Network",
+            "Peer-To-Peer Network",
+            "Mainframe Network",
+            "Storage Area Network",
+          ],
+          correct: [1],
+          rationale:
+            "In a P2P architecture, every computer has equal status and can act as both a client and a server. 💻🤝💻",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "What is the typical maximum range for a Personal Area Network (PAN)?",
+          opts: ["1 meter", "10 meters", "100 meters", "1 kilometer"],
+          correct: [1],
+          rationale:
+            "A PAN is designed for an individual person, typically spanning a range of about 10 meters. 📏",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "Which network type would most likely be used to connect computers within a single office building?",
+          opts: ["WAN", "MAN", "LAN", "SAN"],
+          correct: [2],
+          rationale:
+            "A Local Area Network (LAN) is designed for small areas like buildings or offices. 🏢",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "Who is the primary user of Metropolitan Area Networks (MAN) to connect to citizens and industries?",
+          opts: [
+            "Individual home users",
+            "Government agencies",
+            "Small startups",
+            "International space stations",
+          ],
+          correct: [1],
+          rationale:
+            "Government agencies use MANs to interconnect LANs across a city to reach citizens. 🏙️",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "What is considered the largest Wide Area Network (WAN) in the world?",
+          opts: [
+            "A corporate Intranet",
+            "The Internet",
+            "A university campus network",
+            "The City of New York network",
+          ],
+          correct: [1],
+          rationale:
+            "The Internet is the global system of interconnected networks, making it the largest WAN. 🌍",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "Which of these is a defining characteristic of a Storage Area Network (SAN)?",
+          opts: [
+            "It connects devices via satellite links only.",
+            "Storage devices appear as if they are locally attached to the host.",
+            "It is used for low-speed personal data transfers.",
+            "It only works over a range of 10 meters.",
+          ],
+          correct: [1],
+          rationale:
+            "A SAN presents storage to a host so it seems like a local hard drive. 💾",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "In a Client-Server network, what is the role of the 'Client'?",
+          opts: [
+            "Providing resources to all other nodes",
+            "Managing the network security protocols",
+            "Requesting services or data from the server",
+            "Storing all corporate data locally",
+          ],
+          correct: [2],
+          rationale:
+            "Clients are the workstations that use the services provided by the central server. 📡",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "Which network type connects several LANs to form a larger network spanning a city?",
+          opts: ["PAN", "LAN", "MAN", "WAN"],
+          correct: [2],
+          rationale:
+            "MAN (Metropolitan Area Network) interconnects different LANs within a city area. 🏘️",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "A network covering multiple buildings within a University is typically called a...?",
+          opts: ["PAN", "CAN", "WAN", "Nano Network"],
+          correct: [1],
+          rationale:
+            "A Campus Area Network (CAN) is used for specific sites like universities or large corporate bases. 🎓",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "Which transmission mode allows data to flow in only one direction?",
+          opts: ["Half-Duplex", "Full-Duplex", "Simplex", "Multi-Duplex"],
+          correct: [2],
+          rationale:
+            "Simplex mode is unidirectional; data flows in one fixed direction. ➡️",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "A walkie-talkie, where only one person can speak at a time, is an example of which mode?",
+          opts: ["Simplex", "Half-Duplex", "Full-Duplex", "Fixed-Duplex"],
+          correct: [1],
+          rationale:
+            "In half-duplex, both can transmit and receive, but not simultaneously. 📻",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "Which of the following describes 'Full-Duplex' mode?",
+          opts: [
+            "Communication is strictly unidirectional.",
+            "Messages flow in both directions, but not at the same time.",
+            "Stations can send and receive messages simultaneously.",
+            "Communication only happens from the server to the client.",
+          ],
+          correct: [2],
+          rationale:
+            "Full-duplex allows bi-directional communication at the same time, like a phone call. 📞",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "What is the term for the physical or logical arrangement of nodes and connecting lines in a network?",
+          opts: [
+            "Network Architecture",
+            "Network Topology",
+            "Network Protocol",
+            "Network Segment",
+          ],
+          correct: [1],
+          rationale:
+            "Topology refers to the geometric arrangement of the network components. 📐",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "In which topology is every node connected to exactly two other nodes, forming a single continuous path for signals?",
+          opts: [
+            "Star Topology",
+            "Bus Topology",
+            "Ring Topology",
+            "Mesh Topology",
+          ],
+          correct: [2],
+          rationale:
+            "In a Ring topology, devices are connected in a circular fashion. ⭕",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "Which topology uses a central hub or switch to which all other devices are connected?",
+          opts: [
+            "Mesh Topology",
+            "Star Topology",
+            "Line Topology",
+            "Tree Topology",
+          ],
+          correct: [1],
+          rationale:
+            "The Star topology features a central 'hub' that distributes data to all nodes. ⭐",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "Which transmission medium is commonly mentioned for connecting LANs?",
+          opts: [
+            "Satellite links",
+            "Twisted pair or Coaxial cable",
+            "Microwave towers",
+            "Deep-sea cables",
+          ],
+          correct: [1],
+          rationale:
+            "LANs commonly use physical cables like twisted pair for short-distance connections. 🧵",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "According to the hierarchy summary, which network is smaller than a LAN but larger than a BAN?",
+          opts: ["WAN", "MAN", "PAN", "CAN"],
+          correct: [2],
+          rationale: "Based on the hierarchy: Nano -> BAN -> PAN -> LAN. 📱",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "What does 'WAN' stand for?",
+          opts: [
+            "Wireless Area Network",
+            "Wide Area Network",
+            "Web Area Network",
+            "Workstation Access Network",
+          ],
+          correct: [1],
+          rationale:
+            "WAN stands for Wide Area Network, covering large geographic regions. 🗺️",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "Which topology offers the highest redundancy because every node has a point-to-point link to every other node?",
+          opts: ["Star", "Bus", "Fully Connected / Mesh", "Ring"],
+          correct: [2],
+          rationale:
+            "Mesh/Fully Connected ensures multiple paths between all nodes, making it very reliable. 🕸️",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "A network in your home connecting your laptop, phone, and smart TV is most accurately a...?",
+          opts: ["WAN", "MAN", "LAN", "CAN"],
+          correct: [2],
+          rationale:
+            "A home network is a classic example of a small Local Area Network. 🏠",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "In a Peer-to-Peer network, where is the responsibility for security and data backup located?",
+          opts: [
+            "With the Central Administrator",
+            "On the primary server node",
+            "With each individual user on their own machine",
+            "Stored in the cloud automatically",
+          ],
+          correct: [2],
+          rationale:
+            "In P2P, there is no central server, so users are responsible for their own data. 👤",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "Which network type spans across states or even different countries?",
+          opts: ["LAN", "MAN", "WAN", "PAN"],
+          correct: [2],
+          rationale:
+            "WAN covers large geographical areas like states and nations. 🌎",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "What does 'SAN' stand for in the context of high-speed data access?",
+          opts: [
+            "System Area Network",
+            "Storage Area Network",
+            "Secure Area Network",
+            "Server Access Network",
+          ],
+          correct: [1],
+          rationale:
+            "SAN is a specialized network for storage device access. 🗄️",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "Which topology resembles a hierarchy, often described as a collection of star networks?",
+          opts: [
+            "Mesh Topology",
+            "Tree Topology",
+            "Bus Topology",
+            "Ring Topology",
+          ],
+          correct: [1],
+          rationale:
+            "Tree topology has a hierarchical structure with branches. 🌳",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "The Internet backbone often uses fiber optic cables to connect different parts of a WAN. Why?",
+          opts: [
+            "They are cheaper than copper cables.",
+            "They allow for high-speed data transmission over long distances.",
+            "They only work for Simplex communication.",
+            "They are required for PAN connections.",
+          ],
+          correct: [1],
+          rationale:
+            "Fiber optics provide immense bandwidth and low signal loss over thousands of miles. ⚡",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "A network that connects all branches of a large bank within a single city is a...?",
+          opts: ["LAN", "MAN", "PAN", "Nano Network"],
+          correct: [1],
+          rationale:
+            "A Metropolitan Area Network (MAN) is perfect for city-wide corporate connections. 🏦",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "Which architecture is most suitable for a very small office where users want to share a single printer easily?",
+          opts: [
+            "Complex Client-Server",
+            "Peer-To-Peer (P2P)",
+            "Wide Area Network",
+            "Simplex Network",
+          ],
+          correct: [1],
+          rationale:
+            "P2P is easy to set up and cost-effective for small groups sharing resources. 🖨️",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "What is a 'Workstation' in the context of the Client-Server diagrams?",
+          opts: [
+            "The main computer that stores all data",
+            "An individual computer used by a person to access the network",
+            "A specialized device for storage only",
+            "The router that connects to the internet",
+          ],
+          correct: [1],
+          rationale:
+            "Workstations (or clients) are the endpoints where users do their work. 💻",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "Which of these is the smallest network type mentioned in the hierarchy summary?",
+          opts: ["PAN", "BAN", "Nano", "LAN"],
+          correct: [2],
+          rationale:
+            "'Nano' is the smallest level shown in the summary hierarchy of the lecture. 🔬",
+        },
+        {
+          section: "🌐 Network Types & Architectures",
+          text: "Which transmission mode is bidirectional but only one way at a time?",
+          opts: [
+            "Simplex",
+            "Half-Duplex",
+            "Full-Duplex",
+            "Simultaneous-Duplex",
+          ],
+          correct: [1],
+          rationale:
+            "Half-duplex allows communication in both directions, but not simultaneously. 🔄",
+        },
+      ];
+
+      const labels = ["A", "B", "C", "D"];
+      let state = questions.map(() => ({
+        selected: new Set(),
+        submitted: false,
+      }));
+      let correctCount = 0,
+        wrongCount = 0;
+      let timerSeconds = 30 * 60;
+      let timerInterval = null;
+
+      function arraysEqual(a, b) {
+        const sa = [...a].sort(),
+          sb = [...b].sort();
+        return sa.length === sb.length && sa.every((v, i) => v === sb[i]);
+      }
+
+      function startTimer() {
+        if (timerInterval) clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+          if (state.every((s) => s.submitted)) return;
+          if (timerSeconds <= 0) {
+            clearInterval(timerInterval);
+            alert("Time's up! Auto-submitting all pending questions.");
+            for (let i = 0; i < state.length; i++) {
+              if (!state[i].submitted) {
+                state[i].submitted = true;
+                const isRight = arraysEqual(
+                  state[i].selected,
+                  questions[i].correct,
+                );
+                if (isRight) correctCount++;
+                else wrongCount++;
+              }
+            }
+            updateScore();
+            render();
+            checkFinished();
+          } else {
+            timerSeconds--;
+            updateTimerDisplay();
+          }
+        }, 1000);
+      }
+
+      function updateTimerDisplay() {
+        const mins = Math.floor(timerSeconds / 60);
+        const secs = timerSeconds % 60;
+        document.getElementById("timer-display").textContent =
+          `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+      }
+
+      function exportResults() {
+        const totalAnswered = state.filter((s) => s.submitted).length;
+        const percentage =
+          totalAnswered === 0
+            ? 0
+            : Math.round((correctCount / totalAnswered) * 100);
+        const finalGrade =
+          percentage >= 90
+            ? "Excellent"
+            : percentage >= 75
+              ? "Very Good"
+              : percentage >= 60
+                ? "Good"
+                : "Keep Studying";
+        const results = {
+          timestamp: new Date().toISOString(),
+          quiz: "Part 3: Types & Architectures",
+          totalQuestions: questions.length,
+          answered: totalAnswered,
+          correct: correctCount,
+          wrong: wrongCount,
+          percentage: percentage,
+          grade: finalGrade,
+          details: questions.map((q, i) => ({
+            question: q.text,
+            userAnswers: [...state[i].selected].map(
+              (idx) => labels[idx] + ": " + q.opts[idx],
+            ),
+            correctAnswers: q.correct.map(
+              (idx) => labels[idx] + ": " + q.opts[idx],
+            ),
+            isCorrect: state[i].submitted
+              ? arraysEqual(state[i].selected, q.correct)
+              : null,
+            rationale: q.rationale,
+          })),
+        };
+        const dataStr = JSON.stringify(results, null, 2);
+        const blob = new Blob([dataStr], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `quiz_results_part3_${new Date().toISOString().slice(0, 19)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function updateScore() {
+        const done = state.filter((s) => s.submitted).length;
+        document.getElementById("sc-correct").textContent = correctCount;
+        document.getElementById("sc-wrong").textContent = wrongCount;
+        const pct = done === 0 ? 0 : Math.round((correctCount / done) * 100);
+        document.getElementById("sc-score").textContent = pct + "%";
+        document.getElementById("progress-bar").style.width =
+          Math.round((done / questions.length) * 100) + "%";
+      }
+
+      function render() {
+        const container = document.getElementById("quiz-container");
+        container.innerHTML = "";
+        let lastSection = null;
+
+        questions.forEach((q, qi) => {
+          if (q.section && q.section !== lastSection) {
+            lastSection = q.section;
+            const sec = document.createElement("div");
+            sec.className = "section-title";
+            sec.textContent = q.section;
+            container.appendChild(sec);
+          }
+
+          const s = state[qi];
+          const card = document.createElement("div");
+          card.className =
+            "q-card" +
+            (s.submitted
+              ? arraysEqual(s.selected, q.correct)
+                ? " answered-correct"
+                : " answered-wrong"
+              : "");
+          card.id = "card-" + qi;
+
+          const header = document.createElement("div");
+          header.className = "q-header";
+          header.innerHTML = `<span class="q-num">Q${qi + 1}</span><span class="q-text">${q.text}</span>`;
+          card.appendChild(header);
+
+          const optsDiv = document.createElement("div");
+          optsDiv.className = "options";
+
+          q.opts.forEach((o, oi) => {
+            const div = document.createElement("div");
+            let cls = "opt";
+            if (s.submitted) {
+              const isCorrect = q.correct.includes(oi);
+              const isSelected = s.selected.has(oi);
+              if (isCorrect) cls += " revealed-correct";
+              else if (isSelected && !isCorrect) cls += " revealed-wrong";
+              else cls += " dimmed";
+            } else if (s.selected.has(oi)) {
+              cls += " selected";
+            }
+            div.className = cls;
+            div.setAttribute("role", "button");
+            div.setAttribute("tabindex", "0");
+            div.setAttribute("aria-label", `Option ${labels[oi]}: ${o}`);
+            div.innerHTML = `<div class="opt-circle">${labels[oi]}</div> ${o}`;
+            if (!s.submitted) {
+              div.addEventListener("click", () => toggleOpt(qi, oi));
+              div.addEventListener("keypress", (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  toggleOpt(qi, oi);
+                }
+              });
+            }
+            optsDiv.appendChild(div);
+          });
+          card.appendChild(optsDiv);
+
+          if (s.submitted) {
+            const fb = document.createElement("div");
+            const isRight = arraysEqual(s.selected, q.correct);
+            fb.className = "q-feedback show " + (isRight ? "ok" : "err");
+            fb.innerHTML = isRight
+              ? `<span class="icon">✓</span> Correct! Well done.`
+              : `<span class="icon">✗</span> Incorrect — ${q.rationale || "The highlighted options are the correct answers."}`;
+            card.appendChild(fb);
+          }
+
+          if (!s.submitted) {
+            const footer = document.createElement("div");
+            footer.className = "q-footer";
+            const btn = document.createElement("button");
+            btn.className = "btn-submit";
+            btn.textContent = "Confirm";
+            btn.disabled = s.selected.size === 0;
+            btn.addEventListener("click", () => submitQ(qi));
+            footer.appendChild(btn);
+            card.appendChild(footer);
+          }
+
+          container.appendChild(card);
+        });
+      }
+
+      function toggleOpt(qi, oi) {
+        if (state[qi].submitted) return;
+        if (state[qi].selected.has(oi)) state[qi].selected.delete(oi);
+        else state[qi].selected.add(oi);
+
+        const card = document.getElementById(`card-${qi}`);
+        if (card) {
+          const optDivs = card.querySelectorAll(".opt");
+          if (optDivs[oi]) {
+            if (state[qi].selected.has(oi))
+              optDivs[oi].classList.add("selected");
+            else optDivs[oi].classList.remove("selected");
+          }
+          const submitBtn = card.querySelector(".btn-submit");
+          if (submitBtn) submitBtn.disabled = state[qi].selected.size === 0;
+        }
+      }
+
+      function submitQ(qi) {
+        if (state[qi].submitted) return;
+        state[qi].submitted = true;
+        const isRight = arraysEqual(state[qi].selected, questions[qi].correct);
+        if (isRight) correctCount++;
+        else wrongCount++;
+        updateScore();
+        renderCard(qi);
+        checkFinished();
+      }
+
+      function renderCard(qi) {
+        const old = document.getElementById("card-" + qi);
+        if (!old) return;
+        const temp = document.createElement("div");
+        document.getElementById("quiz-container").insertBefore(temp, old);
+        old.remove();
+
+        const q = questions[qi];
+        const s = state[qi];
+        const card = document.createElement("div");
+        card.className =
+          "q-card" +
+          (s.submitted
+            ? arraysEqual(s.selected, q.correct)
+              ? " answered-correct"
+              : " answered-wrong"
+            : "");
+        card.id = "card-" + qi;
+
+        const header = document.createElement("div");
+        header.className = "q-header";
+        header.innerHTML = `<span class="q-num">Q${qi + 1}</span><span class="q-text">${q.text}</span>`;
+        card.appendChild(header);
+
+        const optsDiv = document.createElement("div");
+        optsDiv.className = "options";
+        q.opts.forEach((o, oi) => {
+          const div = document.createElement("div");
+          let cls = "opt";
+          if (s.submitted) {
+            const isCorrect = q.correct.includes(oi);
+            const isSelected = s.selected.has(oi);
+            if (isCorrect) cls += " revealed-correct";
+            else if (isSelected && !isCorrect) cls += " revealed-wrong";
+            else cls += " dimmed";
+          } else if (s.selected.has(oi)) {
+            cls += " selected";
+          }
+          div.className = cls;
+          div.setAttribute("role", "button");
+          div.setAttribute("tabindex", "0");
+          div.setAttribute("aria-label", `Option ${labels[oi]}: ${o}`);
+          div.innerHTML = `<div class="opt-circle">${labels[oi]}</div> ${o}`;
+          if (!s.submitted) {
+            div.addEventListener("click", () => toggleOpt(qi, oi));
+            div.addEventListener("keypress", (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggleOpt(qi, oi);
+              }
+            });
+          }
+          optsDiv.appendChild(div);
+        });
+        card.appendChild(optsDiv);
+
+        if (s.submitted) {
+          const fb = document.createElement("div");
+          const isRight = arraysEqual(s.selected, q.correct);
+          fb.className = "q-feedback show " + (isRight ? "ok" : "err");
+          fb.innerHTML = isRight
+            ? `<span class="icon">✓</span> Correct! Well done.`
+            : `<span class="icon">✗</span> Incorrect — ${q.rationale || "The highlighted options are the correct answers."}`;
+          card.appendChild(fb);
+        }
+
+        if (!s.submitted) {
+          const footer = document.createElement("div");
+          footer.className = "q-footer";
+          const btn = document.createElement("button");
+          btn.className = "btn-submit";
+          btn.textContent = "Confirm";
+          btn.disabled = s.selected.size === 0;
+          btn.addEventListener("click", () => submitQ(qi));
+          footer.appendChild(btn);
+          card.appendChild(footer);
+        }
+
+        temp.replaceWith(card);
+      }
+
+      function checkFinished() {
+        if (state.every((s) => s.submitted)) {
+          if (timerInterval) clearInterval(timerInterval);
+          const pct = Math.round((correctCount / questions.length) * 100);
+          document.getElementById("final-pct").textContent = pct + "%";
+          let grade =
+            pct >= 90
+              ? "Excellent 🏆"
+              : pct >= 75
+                ? "Very Good ✨"
+                : pct >= 60
+                  ? "Good 👍"
+                  : "Keep Studying 📚";
+          document.getElementById("final-grade").textContent = grade;
+          document.getElementById("final-result").style.display = "block";
+          document
+            .getElementById("final-result")
+            .scrollIntoView({ behavior: "smooth" });
+        }
+      }
+
+      function resetQuiz() {
+        if (timerInterval) clearInterval(timerInterval);
+        state = questions.map(() => ({
+          selected: new Set(),
+          submitted: false,
+        }));
+        correctCount = 0;
+        wrongCount = 0;
+        timerSeconds = 30 * 60;
+        updateTimerDisplay();
+        document.getElementById("final-result").style.display = "none";
+        updateScore();
+        render();
+        startTimer();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      render();
+      updateScore();
+      updateTimerDisplay();
+      startTimer();
+
+      document
+        .getElementById("export-btn")
+        .addEventListener("click", exportResults);
+      document.getElementById("reset-btn").addEventListener("click", resetQuiz);
+    </script>
+  </body>
+</html>

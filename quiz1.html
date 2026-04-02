@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Computer Networks Quiz - Part 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --navy2: #1b2d42;
+    --teal: #00c9a7;
+    --teal-dim: rgba(0,201,167,0.12);
+    --red: #ff4d6d;
+    --red-dim: rgba(255,77,109,0.12);
+    --gold: #f5a623;
+    --white: #f0f4f8;
+    --muted: #8899aa;
+    --card: #162032;
+    --border: rgba(255,255,255,0.07);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,201,167,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,201,167,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* Navigation Bar */
+  .nav-bar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 60px;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .nav-btn {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 24px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .nav-btn.active {
+    background: var(--teal);
+    color: var(--navy);
+  }
+  .nav-btn:hover:not(.active) {
+    background: rgba(0,201,167,0.15);
+    color: var(--teal);
+  }
+
+  header { text-align: center; margin-bottom: 3rem; }
+  .badge-top {
+    display: inline-block;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    border: 1px solid var(--teal);
+    border-radius: 20px;
+    padding: 5px 16px;
+    margin-bottom: 1.2rem;
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: .6rem;
+  }
+  h1 span { color: var(--teal); }
+  .subtitle { color: var(--muted); font-size: 15px; font-weight: 300; }
+
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .timer-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    padding: 8px 20px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+  .timer-box span { color: var(--teal); }
+  .btn-export {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 40px;
+    padding: 8px 20px;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .btn-export:hover { background: var(--gold); color: var(--navy); }
+
+  .scoreboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .score-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    text-align: center;
+  }
+  .score-card .label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .score-card .val { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; }
+  .score-card.correct .val { color: var(--teal); }
+  .score-card.wrong  .val { color: var(--red); }
+  .score-card.total  .val { color: var(--gold); }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin: 2.5rem 0 1rem;
+  }
+  .section-title::before, .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--teal);
+    opacity: .25;
+  }
+
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 1.2rem;
+    overflow: hidden;
+    transition: border-color .3s;
+  }
+  .q-card.answered-correct { border-color: rgba(0,201,167,.4); }
+  .q-card.answered-wrong   { border-color: rgba(255,77,109,.3); }
+
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .q-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--teal);
+    background: var(--teal-dim);
+    border-radius: 8px;
+    padding: 4px 10px;
+    white-space: nowrap;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .q-text { font-size: 14px; font-weight: 500; line-height: 1.5; color: var(--white); }
+
+  .options { display: grid; grid-template-columns: 1fr 1fr; }
+  .opt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    border-top: 1px solid var(--border);
+    cursor: pointer;
+    transition: background .2s;
+    font-size: 13.5px;
+    color: #b0c0d0;
+    user-select: none;
+  }
+  .opt:nth-child(odd)  { border-right: 1px solid var(--border); }
+  .opt:hover { background: rgba(255,255,255,0.04); }
+  .opt.selected { background: rgba(0,201,167,0.08); color: var(--white); }
+  .opt.revealed-correct { background: var(--teal-dim) !important; color: var(--teal) !important; }
+  .opt.revealed-wrong   { background: var(--red-dim)  !important; color: var(--red)  !important; }
+  .opt.dimmed { opacity: .4; }
+
+  .opt-circle {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,.2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: all .2s;
+  }
+  .opt.selected          .opt-circle { border-color: var(--teal); color: var(--teal); }
+  .opt.revealed-correct  .opt-circle { background: var(--teal); border-color: var(--teal); color: var(--navy); }
+  .opt.revealed-wrong    .opt-circle { background: var(--red);  border-color: var(--red);  color: #fff; }
+
+  .q-feedback {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border-top: 1px solid var(--border);
+  }
+  .q-feedback.show { display: flex; }
+  .q-feedback.ok  { color: var(--teal); }
+  .q-feedback.err { color: var(--red);  }
+  .q-feedback .icon { font-size: 16px; }
+
+  .q-footer { padding: 10px 16px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; }
+  .btn-submit {
+    background: var(--teal);
+    color: var(--navy);
+    border: none;
+    border-radius: 10px;
+    padding: 8px 22px;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity .2s, transform .1s;
+  }
+  .btn-submit:hover { opacity: .85; }
+  .btn-submit:active { transform: scale(.97); }
+  .btn-submit:disabled { opacity: .3; cursor: not-allowed; }
+
+  #final-result {
+    display: none;
+    background: var(--card);
+    border: 1px solid var(--teal);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  #final-result h2 { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; margin-bottom: .5rem; }
+  #final-result p  { color: var(--muted); margin-bottom: 1.5rem; }
+  .big-score { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; color: var(--teal); line-height: 1; }
+  .grade-label { font-size: 14px; color: var(--gold); margin-top: .5rem; letter-spacing: 2px; text-transform: uppercase; }
+
+  .btn-reset {
+    margin-top: 1.5rem;
+    background: transparent;
+    color: var(--teal);
+    border: 1.5px solid var(--teal);
+    border-radius: 12px;
+    padding: 10px 30px;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+  .btn-reset:hover { background: var(--teal); color: var(--navy); }
+
+  .progress-bar-wrap { height: 4px; background: rgba(255,255,255,.06); border-radius: 2px; margin-bottom: 2rem; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: var(--teal); border-radius: 2px; transition: width .4s ease; width: 0%; }
+
+  @media (max-width: 560px) {
+    .options { grid-template-columns: 1fr; }
+    .opt:nth-child(odd) { border-right: none; }
+    .scoreboard { grid-template-columns: repeat(3,1fr); gap: .5rem; }
+    .score-card .val { font-size: 1.5rem; }
+    .top-bar { flex-direction: column; align-items: stretch; }
+    .timer-box, .btn-export { text-align: center; justify-content: center; }
+    .nav-bar { border-radius: 20px; }
+    .nav-btn { padding: 8px 16px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Navigation Bar -->
+  <div class="nav-bar">
+    <a href="quiz1.html" class="nav-btn active">📚 Lecture 1</a>
+    <a href="quiz2.html" class="nav-btn">🖥️ Part 2: Devices & Media</a>
+    <a href="quiz3.html" class="nav-btn">🌐 Part 3: Types & Architectures</a>
+  </div>
+
+  <header>
+    <div class="badge-top">Lecture 1 · Computer Networks</div>
+    <h1>Network <span>Quiz</span></h1>
+    <p class="subtitle">Lecture 1 · Select all correct answers · then confirm</p>
+  </header>
+
+  <div class="top-bar">
+    <div class="timer-box">⏱️ <span id="timer-display">30:00</span></div>
+    <button class="btn-export" id="export-btn">📎 Export Results</button>
+  </div>
+
+  <div class="scoreboard">
+    <div class="score-card correct"><div class="label">Correct</div><div class="val" id="sc-correct">0</div></div>
+    <div class="score-card wrong" ><div class="label">Wrong</div>  <div class="val" id="sc-wrong">0</div></div>
+    <div class="score-card total" ><div class="label">Score</div>  <div class="val" id="sc-score">0%</div></div>
+  </div>
+
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-bar"></div></div>
+
+  <div id="quiz-container"></div>
+  <div id="final-result">
+    <h2>Quiz Complete 🎉</h2>
+    <p>Here's how you did</p>
+    <div class="big-score" id="final-pct">0%</div>
+    <div class="grade-label" id="final-grade">—</div>
+    <br/>
+    <button class="btn-reset" id="reset-btn">↺ Try Again</button>
+  </div>
+
+</div>
+
+<script>
+// ============================================
+// Lecture 1 - 32 Questions
+// ============================================
+const questions = [
+  {
+    section: "Part 1 — What is a Network?",
+    text: "Which of the following correctly describe a Computer Network?",
+    opts: ["Collection of connected devices","Allows sharing of data and resources","Works only for a single user","Can be local (LAN) or wide-area (WAN)"],
+    correct: [0,1,3]
+  },
+  {
+    text: "Which of the following are examples of Types of Networks?",
+    opts: ["Social Network","Neural Network","Optical Network","Transportation Network"],
+    correct: [0,1,3]
+  },
+  {
+    text: "Which are General Characteristics of Networks?",
+    opts: ["Scalability","Resource Sharing","Single point of access only","Communication"],
+    correct: [0,1,3]
+  },
+  {
+    text: "Which of the following are uses of Computer Networks?",
+    opts: ["Data Storage and Backup","Research and Education","Preventing all communication","Entertainment and Media"],
+    correct: [0,1,3]
+  },
+  {
+    text: "Computer Networks is a branch under which field?",
+    opts: ["Computer Science","Mathematics only","Medicine","Physics only"],
+    correct: [0]
+  },
+  {
+    text: "Which are 'nearby sciences' related to Computer Networks?",
+    opts: ["Cybersecurity","Cloud Computing","Organic Chemistry","Telecommunications"],
+    correct: [0,1,3]
+  },
+  {
+    section: "Jobs & Certifications",
+    text: "Which are main jobs in Computer Networking?",
+    opts: ["Network Engineer","Network Architect","Dentist","Network Administrator"],
+    correct: [0,1,3]
+  },
+  {
+    text: "What does a Network Engineer do?",
+    opts: ["Designs and implements network solutions","Only provides help desk support","Works on LANs, WANs, and data centers","Manages HR departments"],
+    correct: [0,2]
+  },
+  {
+    text: "Which are valid Cisco certification levels?",
+    opts: ["CCNA (Associate)","CCIE (Expert)","CCBA (Beginner)","CCNP (Professional)"],
+    correct: [0,1,3]
+  },
+  {
+    text: "Which are valid CompTIA certifications?",
+    opts: ["Network+","Security+","CCNA","A+"],
+    correct: [0,1,3]
+  },
+  {
+    text: "What are differences between System and Network Administrator (Scope)?",
+    opts: ["Sys Admin focuses on OS, software, servers","Net Admin handles network maintenance","Both do exactly the same tasks","Network Admin manages HR"],
+    correct: [0,1]
+  },
+  {
+    text: "Which are Microsoft certification levels?",
+    opts: ["MTA","MCSE","CCNP","MCSA"],
+    correct: [0,1,3]
+  },
+  {
+    section: "Part 2 — Host, Client, Server & IP Address",
+    text: "Which of the following are examples of Hosts?",
+    opts: ["Laptops","Cloud Servers","Network cables","Smart Watches (IoT)"],
+    correct: [0,1,3]
+  },
+  {
+    text: "Which correctly describe the Client-Server relationship?",
+    opts: ["Clients initiate requests","Servers respond to requests","Servers initiate requests","Server is a computer with special software"],
+    correct: [0,1,3]
+  },
+  {
+    text: "Which statements about IP Addresses are correct?",
+    opts: ["It is the identity of each host","IPv4 is 32 bits long","Each octet can be 0–512","Represented as 4 octets"],
+    correct: [0,1,3]
+  },
+  {
+    text: "What are the two parts of an IP Address?",
+    opts: ["Network Address","Host Address","MAC Address","Port Address"],
+    correct: [0,1]
+  },
+  {
+    text: "Which are correct about Public IP Address?",
+    opts: ["Has global reach","Assigned by ISP","Only local reach","Assigned by the router"],
+    correct: [0,1]
+  },
+  {
+    text: "Which are correct about Private IP Address?",
+    opts: ["Only local reach","Assigned by the router","Used to communicate over the Internet","Used within a private network"],
+    correct: [0,1,3]
+  },
+  {
+    text: "Which Subnet Mask belongs to Class C?",
+    opts: ["255.0.0.0","255.255.0.0","255.255.255.0","255.255.255.255"],
+    correct: [2]
+  },
+  {
+    text: "Which correctly compare IPv4 vs IPv6?",
+    opts: ["IPv4 = 32 bits, IPv6 = 128 bits","IPv6 supports autoconfiguration","IPv4 was deployed in 1998","IPv6 uses hexadecimal notation"],
+    correct: [0,1,3]
+  },
+  {
+    text: "Which correctly describe the MAC Address?",
+    opts: ["Physical address of the device","48 bits long (6 octets)","Can be changed easily like IP","Written in hexadecimal (0–9, A–F)"],
+    correct: [0,1,3]
+  },
+  {
+    text: "The MAC Address consists of two parts. Which are they?",
+    opts: ["Vendor code (first 3 octets)","Unique number (last 3 octets)","Network address","Subnet mask"],
+    correct: [0,1]
+  },
+  {
+    section: "Part 3 — Common Network Commands",
+    text: "What does the 'ping' command do?",
+    opts: ["Tests reachability of a device","Shows packet loss statistics","Displays MAC address","Traces the full route"],
+    correct: [0,1]
+  },
+  {
+    text: "Which commands display IP address information?",
+    opts: ["ipconfig","ipconfig /all","getmac","hostname"],
+    correct: [0,1]
+  },
+  {
+    text: "Which are correct about 'tracert'?",
+    opts: ["Traces the route a packet takes","Shows each hop along the route","Shows your MAC address","Renews your IP address"],
+    correct: [0,1]
+  },
+  {
+    text: "What does 'nslookup' do?",
+    opts: ["Shows DNS server being used","Resolves domain names to IPs","Pings a device","Shows system hardware info"],
+    correct: [0,1]
+  },
+  {
+    text: "Which are correct about the DNS system?",
+    opts: ["Translates domain names to IPs","Called the 'phonebook of the Internet'","Assigns MAC addresses","Only works with IPv6"],
+    correct: [0,1]
+  },
+  {
+    text: "What are the ipconfig parameters and their correct descriptions?",
+    opts: ["/all → full TCP/IP configuration","/release → releases IPv4 address","/renew → deletes all network settings","/renew → renews IPv4 address"],
+    correct: [0,1,3]
+  },
+  {
+    text: "What does 'arp -a' display?",
+    opts: ["IP to MAC address mappings","The ARP cache table","Your public IP address","The name of the computer"],
+    correct: [0,1]
+  },
+  {
+    text: "Which commands give information about your computer's identity on the network?",
+    opts: ["hostname","systeminfo","getmac","tracert"],
+    correct: [0,1,2]
+  },
+  {
+    text: "'pathping' compared to 'ping' and 'tracert':",
+    opts: ["Provides more detailed statistics","Reports on packet loss per hop","Less detailed than ping","Includes latency reports"],
+    correct: [0,1,3]
+  },
+  {
+    text: "Which correctly describe what 'systeminfo' shows?",
+    opts: ["OS name and version","Network card information","Only shows MAC address","System manufacturer and model"],
+    correct: [0,1,3]
+  }
+];
+
+const labels = ['A','B','C','D'];
+let state = questions.map(() => ({ selected: new Set(), submitted: false }));
+let correctCount = 0, wrongCount = 0;
+let timerSeconds = 30 * 60;
+let timerInterval = null;
+
+function arraysEqual(a, b) {
+  const sa = [...a].sort(), sb = [...b].sort();
+  return sa.length === sb.length && sa.every((v,i) => v === sb[i]);
+}
+
+function startTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    if (state.every(s => s.submitted)) return;
+    if (timerSeconds <= 0) {
+      clearInterval(timerInterval);
+      alert("Time's up! Auto-submitting all pending questions.");
+      for (let i = 0; i < state.length; i++) {
+        if (!state[i].submitted) {
+          state[i].submitted = true;
+          const isRight = arraysEqual(state[i].selected, questions[i].correct);
+          if (isRight) correctCount++; else wrongCount++;
+        }
+      }
+      updateScore();
+      render();
+      checkFinished();
+    } else {
+      timerSeconds--;
+      updateTimerDisplay();
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const mins = Math.floor(timerSeconds / 60);
+  const secs = timerSeconds % 60;
+  document.getElementById('timer-display').textContent = `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+}
+
+function exportResults() {
+  const totalAnswered = state.filter(s => s.submitted).length;
+  const percentage = totalAnswered === 0 ? 0 : Math.round((correctCount / totalAnswered) * 100);
+  const finalGrade = percentage >= 90 ? 'Excellent' : percentage >= 75 ? 'Very Good' : percentage >= 60 ? 'Good' : 'Keep Studying';
+  const results = {
+    timestamp: new Date().toISOString(),
+    quiz: "Lecture 1",
+    totalQuestions: questions.length,
+    answered: totalAnswered,
+    correct: correctCount,
+    wrong: wrongCount,
+    percentage: percentage,
+    grade: finalGrade,
+    details: questions.map((q, i) => ({
+      question: q.text,
+      userAnswers: [...state[i].selected].map(idx => labels[idx] + ': ' + q.opts[idx]),
+      correctAnswers: q.correct.map(idx => labels[idx] + ': ' + q.opts[idx]),
+      isCorrect: state[i].submitted ? arraysEqual(state[i].selected, q.correct) : null
+    }))
+  };
+  const dataStr = JSON.stringify(results, null, 2);
+  const blob = new Blob([dataStr], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `quiz_results_part1_${new Date().toISOString().slice(0,19)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function updateScore() {
+  const done = state.filter(s => s.submitted).length;
+  document.getElementById('sc-correct').textContent = correctCount;
+  document.getElementById('sc-wrong').textContent   = wrongCount;
+  const pct = done === 0 ? 0 : Math.round((correctCount / done) * 100);
+  document.getElementById('sc-score').textContent = pct + '%';
+  document.getElementById('progress-bar').style.width = Math.round((done / questions.length) * 100) + '%';
+}
+
+function render() {
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  let lastSection = null;
+
+  questions.forEach((q, qi) => {
+    if (q.section && q.section !== lastSection) {
+      lastSection = q.section;
+      const sec = document.createElement('div');
+      sec.className = 'section-title';
+      sec.textContent = q.section;
+      container.appendChild(sec);
+    }
+
+    const s = state[qi];
+    const card = document.createElement('div');
+    card.className = 'q-card' + (s.submitted ? (arraysEqual(s.selected, q.correct) ? ' answered-correct' : ' answered-wrong') : '');
+    card.id = 'card-' + qi;
+
+    const header = document.createElement('div');
+    header.className = 'q-header';
+    header.innerHTML = `<span class="q-num">Q${qi+1}</span><span class="q-text">${q.text}</span>`;
+    card.appendChild(header);
+
+    const optsDiv = document.createElement('div');
+    optsDiv.className = 'options';
+
+    q.opts.forEach((o, oi) => {
+      const div = document.createElement('div');
+      let cls = 'opt';
+      if (s.submitted) {
+        const isCorrect = q.correct.includes(oi);
+        const isSelected = s.selected.has(oi);
+        if (isCorrect) cls += ' revealed-correct';
+        else if (isSelected && !isCorrect) cls += ' revealed-wrong';
+        else cls += ' dimmed';
+      } else if (s.selected.has(oi)) {
+        cls += ' selected';
+      }
+      div.className = cls;
+      div.setAttribute('role', 'button');
+      div.setAttribute('tabindex', '0');
+      div.setAttribute('aria-label', `Option ${labels[oi]}: ${o}`);
+      div.innerHTML = `<div class="opt-circle">${labels[oi]}</div> ${o}`;
+      if (!s.submitted) {
+        div.addEventListener('click', () => toggleOpt(qi, oi));
+        div.addEventListener('keypress', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleOpt(qi, oi); } });
+      }
+      optsDiv.appendChild(div);
+    });
+    card.appendChild(optsDiv);
+
+    if (s.submitted) {
+      const fb = document.createElement('div');
+      const isRight = arraysEqual(s.selected, q.correct);
+      fb.className = 'q-feedback show ' + (isRight ? 'ok' : 'err');
+      fb.innerHTML = isRight
+        ? `<span class="icon">✓</span> Correct! Well done.`
+        : `<span class="icon">✗</span> Incorrect — The highlighted options are the correct answers.`;
+      card.appendChild(fb);
+    }
+
+    if (!s.submitted) {
+      const footer = document.createElement('div');
+      footer.className = 'q-footer';
+      const btn = document.createElement('button');
+      btn.className = 'btn-submit';
+      btn.textContent = 'Confirm';
+      btn.disabled = s.selected.size === 0;
+      btn.addEventListener('click', () => submitQ(qi));
+      footer.appendChild(btn);
+      card.appendChild(footer);
+    }
+
+    container.appendChild(card);
+  });
+}
+
+function toggleOpt(qi, oi) {
+  if (state[qi].submitted) return;
+  if (state[qi].selected.has(oi)) state[qi].selected.delete(oi);
+  else state[qi].selected.add(oi);
+  
+  const card = document.getElementById(`card-${qi}`);
+  if (card) {
+    const optDivs = card.querySelectorAll('.opt');
+    if (optDivs[oi]) {
+      if (state[qi].selected.has(oi)) optDivs[oi].classList.add('selected');
+      else optDivs[oi].classList.remove('selected');
+    }
+    const submitBtn = card.querySelector('.btn-submit');
+    if (submitBtn) submitBtn.disabled = state[qi].selected.size === 0;
+  }
+}
+
+function submitQ(qi) {
+  if (state[qi].submitted) return;
+  state[qi].submitted = true;
+  const isRight = arraysEqual(state[qi].selected, questions[qi].correct);
+  if (isRight) correctCount++; else wrongCount++;
+  updateScore();
+  renderCard(qi);
+  checkFinished();
+}
+
+function renderCard(qi) {
+  const old = document.getElementById('card-' + qi);
+  if (!old) return;
+  const temp = document.createElement('div');
+  document.getElementById('quiz-container').insertBefore(temp, old);
+  old.remove();
+
+  const q = questions[qi];
+  const s = state[qi];
+  const card = document.createElement('div');
+  card.className = 'q-card' + (s.submitted ? (arraysEqual(s.selected, q.correct) ? ' answered-correct' : ' answered-wrong') : '');
+  card.id = 'card-' + qi;
+
+  const header = document.createElement('div');
+  header.className = 'q-header';
+  header.innerHTML = `<span class="q-num">Q${qi+1}</span><span class="q-text">${q.text}</span>`;
+  card.appendChild(header);
+
+  const optsDiv = document.createElement('div');
+  optsDiv.className = 'options';
+  q.opts.forEach((o, oi) => {
+    const div = document.createElement('div');
+    let cls = 'opt';
+    if (s.submitted) {
+      const isCorrect = q.correct.includes(oi);
+      const isSelected = s.selected.has(oi);
+      if (isCorrect) cls += ' revealed-correct';
+      else if (isSelected && !isCorrect) cls += ' revealed-wrong';
+      else cls += ' dimmed';
+    } else if (s.selected.has(oi)) {
+      cls += ' selected';
+    }
+    div.className = cls;
+    div.setAttribute('role', 'button');
+    div.setAttribute('tabindex', '0');
+    div.setAttribute('aria-label', `Option ${labels[oi]}: ${o}`);
+    div.innerHTML = `<div class="opt-circle">${labels[oi]}</div> ${o}`;
+    if (!s.submitted) {
+      div.addEventListener('click', () => toggleOpt(qi, oi));
+      div.addEventListener('keypress', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleOpt(qi, oi); } });
+    }
+    optsDiv.appendChild(div);
+  });
+  card.appendChild(optsDiv);
+
+  if (s.submitted) {
+    const fb = document.createElement('div');
+    const isRight = arraysEqual(s.selected, q.correct);
+    fb.className = 'q-feedback show ' + (isRight ? 'ok' : 'err');
+    fb.innerHTML = isRight
+      ? `<span class="icon">✓</span> Correct! Well done.`
+      : `<span class="icon">✗</span> Incorrect — The highlighted options are the correct answers.`;
+    card.appendChild(fb);
+  }
+
+  if (!s.submitted) {
+    const footer = document.createElement('div');
+    footer.className = 'q-footer';
+    const btn = document.createElement('button');
+    btn.className = 'btn-submit';
+    btn.textContent = 'Confirm';
+    btn.disabled = s.selected.size === 0;
+    btn.addEventListener('click', () => submitQ(qi));
+    footer.appendChild(btn);
+    card.appendChild(footer);
+  }
+
+  temp.replaceWith(card);
+}
+
+function checkFinished() {
+  if (state.every(s => s.submitted)) {
+    if (timerInterval) clearInterval(timerInterval);
+    const pct = Math.round((correctCount / questions.length) * 100);
+    document.getElementById('final-pct').textContent = pct + '%';
+    let grade = pct >= 90 ? 'Excellent 🏆' : pct >= 75 ? 'Very Good ✨' : pct >= 60 ? 'Good 👍' : 'Keep Studying 📚';
+    document.getElementById('final-grade').textContent = grade;
+    document.getElementById('final-result').style.display = 'block';
+    document.getElementById('final-result').scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function resetQuiz() {
+  if (timerInterval) clearInterval(timerInterval);
+  state = questions.map(() => ({ selected: new Set(), submitted: false }));
+  correctCount = 0;
+  wrongCount = 0;
+  timerSeconds = 30 * 60;
+  updateTimerDisplay();
+  document.getElementById('final-result').style.display = 'none';
+  updateScore();
+  render();
+  startTimer();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Initialize
+render();
+updateScore();
+updateTimerDisplay();
+startTimer();
+
+// Event listeners
+document.getElementById('export-btn').addEventListener('click', exportResults);
+document.getElementById('reset-btn').addEventListener('click', resetQuiz);
+</script>
+</body>
+</html>
