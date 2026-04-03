@@ -323,10 +323,11 @@
 
   <!-- Navigation Bar -->
   <div class="nav-bar">
-    <a href="index.html" class="nav-btn active">📚 Lecture 1</a>
+    <a href="index.html" class="nav-btn ">📚 Lecture 1</a>
     <a href="quiz2.html" class="nav-btn">🖥️ Lecture 2</a>
     <a href="quiz3.html" class="nav-btn">🌐 Lecture 3</a>
-    <a href="quiz4.html" class="nav-btn ">🌐Lecture 4</a>
+    <a href="quiz4.html" class="nav-btn active">🌐Lecture 4</a>
+     
   </div>
 
   <header>
@@ -366,169 +367,460 @@
 // ============================================
 const questions = [
   {
-    section: "Part 1 — What is a Network?",
-    text: "Which of the following correctly describe a Computer Network?",
-    opts: ["Collection of connected devices","Allows sharing of data and resources","Works only for a single user","Can be local (LAN) or wide-area (WAN)"],
-    correct: [0,1,3]
+    section: "🌐 Layered Architecture & OSI Model",
+    text: 'What is the main aim of "Layered Architecture" in network design?',
+    opts: [
+      "To divide the design into small, manageable pieces.",
+      "To ensure dependency between layers so they work as one unit.",
+      "To provide a full set of services to manage communications.",
+      "Each lower layer adds its services to the higher layer.",
+    ],
+    correct: [0, 2, 3],
+    rationale:
+      "Layered architecture divides design into manageable pieces, provides a full service set, and lets each lower layer serve the higher one. Layers are independent, not dependent on each other.",
   },
   {
-    text: "Which of the following are examples of Types of Networks?",
-    opts: ["Social Network","Neural Network","Optical Network","Transportation Network"],
-    correct: [0,1,3]
+    section: "🌐 Layered Architecture & OSI Model",
+    text: 'Which statements correctly describe the OSI (Open Systems Interconnection) model?',
+    opts: [
+      "It was developed by the International Organization for Standardization (ISO).",
+      "It consists of seven distinct layers.",
+      "It is a protocol, not a theoretical framework.",
+      "It allows different systems to communicate regardless of their underlying architecture.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "The OSI model was developed by ISO, has 7 layers, and is a theoretical framework (not a protocol) that enables interoperability between different systems.",
   },
   {
-    text: "Which are General Characteristics of Networks?",
-    opts: ["Scalability","Resource Sharing","Single point of access only","Communication"],
-    correct: [0,1,3]
+    section: "🌐 Layered Architecture & OSI Model",
+    text: 'Which of the following belong to the "Upper Layers" (Application Layers) of the OSI model?',
+    opts: [
+      "Presentation Layer.",
+      "Network Layer.",
+      "Session Layer.",
+      "Application Layer.",
+    ],
+    correct: [0, 2, 3],
+    rationale:
+      "Upper layers are: Application (7), Presentation (6), and Session (5). The Network Layer (3) is a lower layer.",
   },
   {
-    text: "Which of the following are uses of Computer Networks?",
-    opts: ["Data Storage and Backup","Research and Education","Preventing all communication","Entertainment and Media"],
-    correct: [0,1,3]
+    section: "🌐 Layered Architecture & OSI Model",
+    text: "Match the Protocol Data Unit (PDU) with its correct layer — which are all correct?",
+    opts: [
+      "Layer 4 (Transport) → Segments.",
+      "Layer 3 (Network) → Packets.",
+      "Layer 2 (Data Link) → Frames.",
+      "Layer 1 (Physical) → Bits.",
+    ],
+    correct: [0, 1, 2, 3],
+    rationale:
+      "All four PDU mappings are correct: Transport=Segments, Network=Packets, Data Link=Frames, Physical=Bits.",
   },
   {
-    text: "Computer Networks is a branch under which field?",
-    opts: ["Computer Science","Mathematics only","Medicine","Physics only"],
-    correct: [0]
+    section: "🔧 OSI Layer Functions",
+    text: 'What are the primary functions of the "Physical Layer" (Layer 1)?',
+    opts: [
+      "Transforming bits into signals.",
+      "Defining the physical topology (e.g., Star, Bus).",
+      "Bit synchronization (controlling the clock).",
+      "Routing packets between networks.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Layer 1 handles signal conversion, physical topology definition, and bit synchronization. Routing is a Layer 3 (Network) function.",
   },
   {
-    text: "Which are 'nearby sciences' related to Computer Networks?",
-    opts: ["Cybersecurity","Cloud Computing","Organic Chemistry","Telecommunications"],
-    correct: [0,1,3]
+    section: "🔧 OSI Layer Functions",
+    text: 'The "Data Link Layer" (Layer 2) is responsible for which tasks?',
+    opts: [
+      "Physical addressing (MAC address).",
+      "Flow control to prevent overwhelming the receiver.",
+      "Error control using a trailer (CRC).",
+      "End-to-end process delivery.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Layer 2 handles MAC addressing, hop-level flow control, and CRC error checking. End-to-end delivery is a Layer 4 (Transport) function.",
   },
   {
-    section: "Jobs & Certifications",
-    text: "Which are main jobs in Computer Networking?",
-    opts: ["Network Engineer","Network Architect","Dentist","Network Administrator"],
-    correct: [0,1,3]
+    section: "🔧 OSI Layer Functions",
+    text: 'Which of the following are key responsibilities of the "Network Layer" (Layer 3)?',
+    opts: [
+      "Logical addressing (IP addresses).",
+      "Routing (deciding the optimal path).",
+      "Encapsulating data into frames.",
+      "Connecting different networks together.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "Layer 3 handles IP addressing, routing, and inter-network connectivity. Encapsulating data into frames is a Layer 2 function.",
   },
   {
-    text: "What does a Network Engineer do?",
-    opts: ["Designs and implements network solutions","Only provides help desk support","Works on LANs, WANs, and data centers","Manages HR departments"],
-    correct: [0,2]
+    section: "🔧 OSI Layer Functions",
+    text: 'The "Transport Layer" (Layer 4) ensures:',
+    opts: [
+      "Service-point addressing (Port numbers).",
+      "Segmentation and reassembly of data.",
+      "Error-free delivery of the entire message.",
+      "Establishing a session between two devices.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Layer 4 provides port-based addressing, segmentation/reassembly, and reliable error-free delivery. Session establishment is a Layer 5 function.",
   },
   {
-    text: "Which are valid Cisco certification levels?",
-    opts: ["CCNA (Associate)","CCIE (Expert)","CCBA (Beginner)","CCNP (Professional)"],
-    correct: [0,1,3]
+    section: "🔧 OSI Layer Functions",
+    text: 'Which layer is responsible for "Data Compression" and "Encryption"?',
+    opts: [
+      "Session Layer.",
+      "Presentation Layer.",
+      "Application Layer.",
+      "Layer 6.",
+    ],
+    correct: [1, 3],
+    rationale:
+      "The Presentation Layer (Layer 6) handles translation, encryption, and compression of data.",
   },
   {
-    text: "Which are valid CompTIA certifications?",
-    opts: ["Network+","Security+","CCNA","A+"],
-    correct: [0,1,3]
+    section: "🔧 OSI Layer Functions",
+    text: 'What is the role of the "Application Layer" (Layer 7)?',
+    opts: [
+      "Providing a user interface.",
+      "Supporting services like email (SMTP) and file transfer (FTP).",
+      "Defining how bits are represented as signals.",
+      "Managing the dialogue (session control).",
+    ],
+    correct: [0, 1],
+    rationale:
+      "Layer 7 provides the user interface and supports application-level services like SMTP and FTP. Signal representation is Layer 1; session control is Layer 5.",
   },
   {
-    text: "What are differences between System and Network Administrator (Scope)?",
-    opts: ["Sys Admin focuses on OS, software, servers","Net Admin handles network maintenance","Both do exactly the same tasks","Network Admin manages HR"],
-    correct: [0,1]
+    section: "📦 Transport Layer Protocols (TCP & UDP)",
+    text: 'What defines "TCP" (Transmission Control Protocol)?',
+    opts: [
+      "It is connection-oriented.",
+      "It is reliable and provides error-checking.",
+      "It uses a three-way handshake (SYN, SYN-ACK, ACK).",
+      "It is faster than UDP.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "TCP is connection-oriented, reliable, and uses a three-way handshake. UDP is actually faster than TCP due to lower overhead.",
   },
   {
-    text: "Which are Microsoft certification levels?",
-    opts: ["MTA","MCSE","CCNP","MCSA"],
-    correct: [0,1,3]
+    section: "📦 Transport Layer Protocols (TCP & UDP)",
+    text: 'Which statements are true about "UDP" (User Datagram Protocol)?',
+    opts: [
+      "It is connectionless and unreliable.",
+      "It provides no flow control or error recovery.",
+      "It is ideal for live streaming and VoIP.",
+      "It guarantees that all packets will arrive.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "UDP is connectionless, has no error recovery, and suits real-time applications. It does NOT guarantee packet delivery.",
   },
   {
-    section: "Part 2 — Host, Client, Server & IP Address",
-    text: "Which of the following are examples of Hosts?",
-    opts: ["Laptops","Cloud Servers","Network cables","Smart Watches (IoT)"],
-    correct: [0,1,3]
+    section: "📦 Transport Layer Protocols (TCP & UDP)",
+    text: 'In the TCP "Three-Way Handshake" process:',
+    opts: [
+      "The client sends a SYN packet.",
+      "The server responds with SYN-ACK.",
+      "The client finalizes with an ACK.",
+      "The server sends data immediately after the first SYN.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Three-way handshake: Client→SYN, Server→SYN-ACK, Client→ACK. Data transfer begins only after the handshake is complete.",
   },
   {
-    text: "Which correctly describe the Client-Server relationship?",
-    opts: ["Clients initiate requests","Servers respond to requests","Servers initiate requests","Server is a computer with special software"],
-    correct: [0,1,3]
+    section: "🔢 IP Addressing & Ports",
+    text: "What are the differences between an IP address and a MAC address?",
+    opts: [
+      "IP is a logical address; MAC is a physical address.",
+      "IP is 32-bit (IPv4); MAC is 48-bit.",
+      "MAC addresses change when you move networks; IP addresses stay the same.",
+      "IP is used for routing; MAC is used for local delivery.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "IP is logical (32-bit) and used for routing; MAC is physical (48-bit) and used for local delivery. It is IP addresses that change across networks, not MAC addresses.",
   },
   {
-    text: "Which statements about IP Addresses are correct?",
-    opts: ["It is the identity of each host","IPv4 is 32 bits long","Each octet can be 0–512","Represented as 4 octets"],
-    correct: [0,1,3]
+    section: "🔢 IP Addressing & Ports",
+    text: 'Regarding "Port Numbers", which of the following are correct?',
+    opts: [
+      "They identify specific applications or services (e.g., HTTP = 80).",
+      "They allow a single device to run multiple network applications simultaneously.",
+      "They operate at the Network Layer.",
+      "The total number of ports is 65,535.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "Ports identify services, enable multiplexing of applications, and total 65,535. They operate at the Transport Layer (Layer 4), not the Network Layer.",
   },
   {
-    text: "What are the two parts of an IP Address?",
-    opts: ["Network Address","Host Address","MAC Address","Port Address"],
-    correct: [0,1]
+    section: "🔢 IP Addressing & Ports",
+    text: "Match the service with its correct default port — which are all correct?",
+    opts: [
+      "DNS → 53",
+      "HTTPS → 443",
+      "FTP → 20/21",
+      "SMTP → 25",
+    ],
+    correct: [0, 1, 2, 3],
+    rationale:
+      "All mappings are correct: DNS=53, HTTPS=443, FTP=20(data)/21(control), SMTP=25.",
   },
   {
-    text: "Which are correct about Public IP Address?",
-    opts: ["Has global reach","Assigned by ISP","Only local reach","Assigned by the router"],
-    correct: [0,1]
+    section: "🗺️ Network Layer & Routing",
+    text: 'What does the "Routing Table" contain?',
+    opts: [
+      "A list of all available routes and their metrics.",
+      "MAC addresses of all connected devices.",
+      "Information initialized and maintained by routing algorithms.",
+      "The optimal path for packet delivery.",
+    ],
+    correct: [0, 2, 3],
+    rationale:
+      "Routing tables store available routes with metrics and optimal paths, maintained by routing algorithms. MAC addresses are stored in ARP tables, not routing tables.",
   },
   {
-    text: "Which are correct about Private IP Address?",
-    opts: ["Only local reach","Assigned by the router","Used to communicate over the Internet","Used within a private network"],
-    correct: [0,1,3]
+    section: "🗺️ Network Layer & Routing",
+    text: 'Compare "Static" vs "Dynamic" Routing — which statements are true?',
+    opts: [
+      "Static routing is more secure.",
+      "Dynamic routing is better for large, complex networks.",
+      "Static routing requires manual intervention to reroute traffic.",
+      "Dynamic routing protocols include RIP and OSPF.",
+    ],
+    correct: [0, 1, 2, 3],
+    rationale:
+      "All four statements correctly describe the differences: static is more secure but requires manual changes, while dynamic scales better and uses protocols like RIP and OSPF.",
   },
   {
-    text: "Which Subnet Mask belongs to Class C?",
-    opts: ["255.0.0.0","255.255.0.0","255.255.255.0","255.255.255.255"],
-    correct: [2]
+    section: "🗺️ Network Layer & Routing",
+    text: 'Which "Metrics" are used by routing protocols to determine the best path?',
+    opts: [
+      "Hop count.",
+      "Delay.",
+      "Bandwidth.",
+      "The number of users on the network.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Standard routing metrics include hop count, delay, and bandwidth. Number of users is not a recognized routing metric.",
   },
   {
-    text: "Which correctly compare IPv4 vs IPv6?",
-    opts: ["IPv4 = 32 bits, IPv6 = 128 bits","IPv6 supports autoconfiguration","IPv4 was deployed in 1998","IPv6 uses hexadecimal notation"],
-    correct: [0,1,3]
+    section: "🗺️ Network Layer & Routing",
+    text: 'What is "Bandwidth" as defined in the lecture?',
+    opts: [
+      "The capacity of a link.",
+      "It is measured in bits per second (bps).",
+      "Higher transfer rates (e.g., gigabit) are preferred over lower rates.",
+      "It is only relevant for wireless networks.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Bandwidth is the capacity of a link, measured in bps, and higher rates are preferred. It applies to all network types, not just wireless.",
   },
   {
-    text: "Which correctly describe the MAC Address?",
-    opts: ["Physical address of the device","48 bits long (6 octets)","Can be changed easily like IP","Written in hexadecimal (0–9, A–F)"],
-    correct: [0,1,3]
+    section: "💻 Application Layer Protocols",
+    text: '"DNS" (Domain Name System) is essential because it:',
+    opts: [
+      "Translates domain names to IP addresses.",
+      "Allows humans to use names instead of memorizing numbers.",
+      "Encrypts all web traffic.",
+      'Resolves names like "google.com" into IP addresses.',
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "DNS resolves domain names to IP addresses, enabling human-friendly browsing. DNS does not encrypt web traffic — that is handled by HTTPS/TLS.",
   },
   {
-    text: "The MAC Address consists of two parts. Which are they?",
-    opts: ["Vendor code (first 3 octets)","Unique number (last 3 octets)","Network address","Subnet mask"],
-    correct: [0,1]
+    section: "💻 Application Layer Protocols",
+    text: 'Which protocols are used for handling "Emails"?',
+    opts: [
+      "SMTP (Sending mail).",
+      "POP3 (Receiving mail).",
+      "IMAP (Accessing mail).",
+      "SNMP.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Email uses SMTP for sending, POP3 for downloading, and IMAP for server-based access. SNMP is a network management protocol.",
   },
   {
-    section: "Part 3 — Common Network Commands",
-    text: "What does the 'ping' command do?",
-    opts: ["Tests reachability of a device","Shows packet loss statistics","Displays MAC address","Traces the full route"],
-    correct: [0,1]
+    section: "💻 Application Layer Protocols",
+    text: 'What are the features of "FTP" (File Transfer Protocol)?',
+    opts: [
+      "It is used to transfer files between computers.",
+      "It uses two ports: 20 for data and 21 for control.",
+      "It is a connectionless protocol.",
+      "It supports both uploading and downloading files.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "FTP transfers files using port 20 (data) and 21 (control), supporting both uploads and downloads. FTP is connection-based (uses TCP), not connectionless.",
   },
   {
-    text: "Which commands display IP address information?",
-    opts: ["ipconfig","ipconfig /all","getmac","hostname"],
-    correct: [0,1]
+    section: "💻 Application Layer Protocols",
+    text: '"DHCP" (Dynamic Host Configuration Protocol) provides:',
+    opts: [
+      "Automatic IP address assignment.",
+      "Security against hackers.",
+      "Subnet masks and default gateways to clients.",
+      "Manual configuration for every device.",
+    ],
+    correct: [0, 2],
+    rationale:
+      "DHCP automatically assigns IP addresses, subnet masks, and default gateways to clients. It provides no security features.",
   },
   {
-    text: "Which are correct about 'tracert'?",
-    opts: ["Traces the route a packet takes","Shows each hop along the route","Shows your MAC address","Renews your IP address"],
-    correct: [0,1]
+    section: "💻 Application Layer Protocols",
+    text: '"HTTPS" is better than "HTTP" because it:',
+    opts: [
+      "Is more secure.",
+      "Is encrypted.",
+      "Uses Port 80.",
+      "Uses Port 443.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "HTTPS is secure and encrypted using TLS, running on Port 443. Port 80 is used by plain HTTP.",
   },
   {
-    text: "What does 'nslookup' do?",
-    opts: ["Shows DNS server being used","Resolves domain names to IPs","Pings a device","Shows system hardware info"],
-    correct: [0,1]
+    section: "🔄 Encapsulation & Decapsulation",
+    text: 'During "Encapsulation" (Data moving DOWN through OSI layers):',
+    opts: [
+      "Headers are added at each layer.",
+      "Information is stripped away at each layer.",
+      "Data becomes Bits at the Physical Layer.",
+      "PDUs change from Segments to Packets to Frames.",
+    ],
+    correct: [0, 2, 3],
+    rationale:
+      "Encapsulation adds headers at each layer going down, with PDUs changing: Segments→Packets→Frames→Bits. Stripping headers is decapsulation (going up).",
   },
   {
-    text: "Which are correct about the DNS system?",
-    opts: ["Translates domain names to IPs","Called the 'phonebook of the Internet'","Assigns MAC addresses","Only works with IPv6"],
-    correct: [0,1]
+    section: "🔄 Encapsulation & Decapsulation",
+    text: 'During "Decapsulation" (Data moving UP through OSI layers):',
+    opts: [
+      "Each layer removes the header added by the sender's corresponding layer.",
+      "Data is read and processed at each layer.",
+      "Only the Physical layer is involved.",
+      "The final result is the original message for the application.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "Decapsulation removes headers layer by layer, with data being read/processed at each step, until the original message is recovered at the top.",
   },
   {
-    text: "What are the ipconfig parameters and their correct descriptions?",
-    opts: ["/all → full TCP/IP configuration","/release → releases IPv4 address","/renew → deletes all network settings","/renew → renews IPv4 address"],
-    correct: [0,1,3]
+    section: "🧠 Advanced Thinking",
+    text: '"Process-to-process delivery" is the primary job of which layer?',
+    opts: [
+      "Network Layer.",
+      "Transport Layer.",
+      "Layer 4.",
+      "Data Link Layer.",
+    ],
+    correct: [1, 2],
+    rationale:
+      "Process-to-process delivery (using port numbers) is the job of the Transport Layer, which is Layer 4. Options B and C refer to the same layer.",
   },
   {
-    text: "What does 'arp -a' display?",
-    opts: ["IP to MAC address mappings","The ARP cache table","Your public IP address","The name of the computer"],
-    correct: [0,1]
+    section: "🧠 Advanced Thinking",
+    text: 'What is a "Service-point" in Layer 4?',
+    opts: [
+      "An IP address.",
+      "A MAC address.",
+      "A Port number.",
+      "A physical connector.",
+    ],
+    correct: [2],
+    rationale:
+      "A service-point (or service-point address) at Layer 4 is a Port number, which identifies the specific application or process.",
   },
   {
-    text: "Which commands give information about your computer's identity on the network?",
-    opts: ["hostname","systeminfo","getmac","tracert"],
-    correct: [0,1,2]
+    section: "🧠 Advanced Thinking",
+    text: "If a packet needs to travel from one LAN to another LAN across the country, which layer handles this?",
+    opts: [
+      "Data Link Layer (Layer 2).",
+      "Network Layer (Layer 3).",
+      "Physical Layer (Layer 1).",
+      "Internet Layer (in TCP/IP).",
+    ],
+    correct: [1, 3],
+    rationale:
+      "Inter-network routing is handled by the Network Layer (Layer 3 in OSI), which corresponds to the Internet Layer in the TCP/IP model.",
   },
   {
-    text: "'pathping' compared to 'ping' and 'tracert':",
-    opts: ["Provides more detailed statistics","Reports on packet loss per hop","Less detailed than ping","Includes latency reports"],
-    correct: [0,1,3]
+    section: "🧠 Advanced Thinking",
+    text: "Why do we divide the network design into layers?",
+    opts: [
+      "To ensure independence between layers.",
+      "To make debugging and updates easier.",
+      "To allow different vendors to build different parts of the network.",
+      "To make the network slower for better security.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Layering ensures independence, simplifies debugging and updates, and enables multi-vendor interoperability. It does not intentionally slow the network.",
   },
   {
-    text: "Which correctly describe what 'systeminfo' shows?",
-    opts: ["OS name and version","Network card information","Only shows MAC address","System manufacturer and model"],
-    correct: [0,1,3]
-  }
+    section: "🧠 Advanced Thinking",
+    text: '"Translation", "Encryption", and "Compression" are functions of:',
+    opts: [
+      "Presentation Layer.",
+      "Application Layer.",
+      "Layer 6.",
+      "Session Layer.",
+    ],
+    correct: [0, 2],
+    rationale:
+      "Translation, encryption, and compression are all functions of the Presentation Layer, which is Layer 6. Options A and C refer to the same layer.",
+  },
+  {
+    section: "🧠 Advanced Thinking",
+    text: 'Which protocol uses the "Best Effort" delivery method?',
+    opts: [
+      "TCP.",
+      "UDP.",
+      "HTTP.",
+      "Any connectionless protocol.",
+    ],
+    correct: [1, 3],
+    rationale:
+      'Best effort means no guaranteed delivery. This applies to UDP and all connectionless protocols. TCP guarantees delivery and is the opposite of "best effort".',
+  },
+  {
+    section: "🧠 Advanced Thinking",
+    text: "A router makes its forwarding decision based on:",
+    opts: [
+      "The destination MAC address.",
+      "The destination IP address.",
+      "The routing table.",
+      "The physical port number.",
+    ],
+    correct: [1, 2],
+    rationale:
+      "Routers forward packets using the destination IP address looked up in the routing table. MAC addresses are used by switches, not routers.",
+  },
+  {
+    section: "🧠 Advanced Thinking",
+    text: '"Flow Control" at the Transport Layer is different from the Data Link Layer because:',
+    opts: [
+      "Transport Layer handles flow control between end-to-end processes.",
+      "Data Link Layer handles flow control between a single link.",
+      "They are exactly the same.",
+      "One uses bits, the other uses frames.",
+    ],
+    correct: [0, 1],
+    rationale:
+      "Transport Layer flow control is end-to-end (between source and destination), while Data Link Layer flow control is link-by-link (between adjacent nodes). They are not the same.",
+  },
 ];
 
 const labels = ['A','B','C','D'];
