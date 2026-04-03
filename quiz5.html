@@ -323,11 +323,11 @@
 
   <!-- Navigation Bar -->
   <div class="nav-bar">
-    <a href="index.html" class="nav-btn active">📚 Lecture 1</a>
+    <a href="index.html" class="nav-btn ">📚 Lecture 1</a>
     <a href="quiz2.html" class="nav-btn">🖥️ Lecture 2</a>
     <a href="quiz3.html" class="nav-btn">🌐 Lecture 3</a>
     <a href="quiz4.html" class="nav-btn ">💡Lecture 4</a>
-     <a href="quiz5.html" class="nav-btn ">🛜Lecture 5</a>
+    <a href="quiz5.html" class="nav-btn active ">🛜Lecture 5</a>
   </div>
 
   <header>
@@ -367,170 +367,301 @@
 // ============================================
 const questions = [
   {
-    section: "Part 1 — What is a Network?",
-    text: "Which of the following correctly describe a Computer Network?",
-    opts: ["Collection of connected devices","Allows sharing of data and resources","Works only for a single user","Can be local (LAN) or wide-area (WAN)"],
-    correct: [0,1,3]
+    section: "📡 Digital-to-Digital Encoding",
+    text: "What is the definition of 'Digital-to-digital encoding' according to the file?",
+    opts: [
+      "Representing digital information by a digital signal.",
+      "Translating binary 1s and 0s into a sequence of voltage pulses.",
+      "Converting analog signals into digital pulses.",
+      "Propagating voltage pulses over a wire.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "Digital-to-digital encoding represents digital info with a digital signal by translating bits into voltage pulses and propagating them over a wire. Converting analog to digital is a different process (analog-to-digital conversion).",
   },
   {
-    text: "Which of the following are examples of Types of Networks?",
-    opts: ["Social Network","Neural Network","Optical Network","Transportation Network"],
-    correct: [0,1,3]
+    section: "📡 Digital-to-Digital Encoding",
+    text: "In 'Unipolar Encoding', how are binary bits represented?",
+    opts: [
+      "1s are represented as a positive value.",
+      "0s are represented as a negative value.",
+      "0s are represented as a zero value.",
+      "Pulse polarity determines if it's positive or negative.",
+    ],
+    correct: [0, 2, 3],
+    rationale:
+      "In Unipolar encoding, binary 1 is a positive voltage, binary 0 is zero voltage, and pulse polarity (positive vs zero) distinguishes the bits. 0 is not represented as a negative value.",
   },
   {
-    text: "Which are General Characteristics of Networks?",
-    opts: ["Scalability","Resource Sharing","Single point of access only","Communication"],
-    correct: [0,1,3]
+    section: "📡 Digital-to-Digital Encoding",
+    text: "What are the advantages of 'Polar Encoding' over Unipolar?",
+    opts: [
+      "It uses two voltage levels (one positive, one negative).",
+      "It reduces the average voltage level.",
+      "It alleviates the DC component problem.",
+      "It uses zero voltage for binary 0.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Polar encoding uses positive and negative voltages, reducing average voltage and alleviating the DC component issue. Using zero voltage for binary 0 is characteristic of Unipolar, not an advantage of Polar.",
   },
   {
-    text: "Which of the following are uses of Computer Networks?",
-    opts: ["Data Storage and Backup","Research and Education","Preventing all communication","Entertainment and Media"],
-    correct: [0,1,3]
+    section: "📡 Digital-to-Digital Encoding",
+    text: "Which statements describe 'Bipolar Encoding' correctly?",
+    opts: [
+      "It uses three voltage levels: positive, negative, and zero.",
+      "Zero level represents binary 0.",
+      "Binary 1 is represented by constant positive voltage.",
+      "Binary 1 is represented by alternating positive and negative voltages.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "Bipolar encoding uses three levels (+/0/-), with zero representing binary 0. Binary 1 alternates between positive and negative voltages, not a constant positive voltage.",
   },
   {
-    text: "Computer Networks is a branch under which field?",
-    opts: ["Computer Science","Mathematics only","Medicine","Physics only"],
-    correct: [0]
+    section: "📡 Digital-to-Digital Encoding",
+    text: "Analyze the NRZ (Non-Return to Zero) schemes mentioned:",
+    opts: [
+      "In NRZ-L, the signal level depends on the bit type (e.g., 0 is positive, 1 is negative).",
+      "In NRZ-I, an inversion of voltage occurs to represent a 1 bit.",
+      "In NRZ-I, a transition occurs between positive and negative for 1 bit.",
+      "Both NRZ-L and NRZ-I are types of Bipolar encoding.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "NRZ-L uses level based on bit type; NRZ-I uses voltage inversion (transition) for binary 1. NRZ schemes are Polar encoding, not Bipolar (which uses three levels).",
   },
   {
-    text: "Which are 'nearby sciences' related to Computer Networks?",
-    opts: ["Cybersecurity","Cloud Computing","Organic Chemistry","Telecommunications"],
-    correct: [0,1,3]
+    section: "📡 Digital-to-Digital Encoding",
+    text: "What makes 'RZ (Return to Zero)' encoding unique?",
+    opts: [
+      "The signal returns to zero between each bit interval.",
+      "It uses three voltage levels (positive, negative, zero).",
+      "It ensures better clock recovery at the receiver end.",
+      "Transitions occur at the midpoint of each bit interval.",
+    ],
+    correct: [0, 1, 2, 3],
+    rationale:
+      "RZ returns to zero between bits, uses three levels (+, -, 0), enables better clock recovery, and has transitions at the bit interval midpoint. All options are correct.",
   },
   {
-    section: "Jobs & Certifications",
-    text: "Which are main jobs in Computer Networking?",
-    opts: ["Network Engineer","Network Architect","Dentist","Network Administrator"],
-    correct: [0,1,3]
+    section: "📡 Digital-to-Digital Encoding",
+    text: "Regarding Biphase encoding (Manchester & Differential Manchester):",
+    opts: [
+      "Manchester combines NRZ-L and RZ schemes.",
+      "Every symbol in Manchester has a level transition in the middle.",
+      "Differential Manchester combines NRZ-I and RZ.",
+      "In Differential Manchester, the level at the beginning of the symbol is determined by the symbol value.",
+    ],
+    correct: [0, 1, 2, 3],
+    rationale:
+      "Manchester = NRZ-L + RZ (mid-bit transition). Differential Manchester = NRZ-I + RZ, where the start level depends on the bit value. All options are correct.",
   },
   {
-    text: "What does a Network Engineer do?",
-    opts: ["Designs and implements network solutions","Only provides help desk support","Works on LANs, WANs, and data centers","Manages HR departments"],
-    correct: [0,2]
+    section: "🛡️ Error Detection and Correction",
+    text: "How is an 'Error' defined in data transmission?",
+    opts: [
+      "When the message received is not identical to the message transmitted.",
+      "When a 0 bit is changed to 1 or vice-versa.",
+      "When the system guarantees identical data delivery.",
+      "A situation where bits are modified during transmission.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "An error occurs when received ≠ transmitted, typically due to bit flips (0→1 or 1→0). Guaranteed identical delivery is the opposite (error-free transmission).",
   },
   {
-    text: "Which are valid Cisco certification levels?",
-    opts: ["CCNA (Associate)","CCIE (Expert)","CCBA (Beginner)","CCNP (Professional)"],
-    correct: [0,1,3]
+    section: "🛡️ Error Detection and Correction",
+    text: "Differentiate between Single-Bit and Burst Errors:",
+    opts: [
+      "Single-Bit Error: Only one bit of a data unit is changed.",
+      "Burst Error: Two or more bits are changed from 0 to 1 or 1 to 0.",
+      "Burst Error: The length is measured from the first corrupted bit to the last.",
+      "Single-bit errors are always 5 bits long.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Single-bit affects one bit; burst affects two or more bits, with length measured from first to last corrupted bit. Single-bit errors are not fixed to any length like 5 bits.",
   },
   {
-    text: "Which are valid CompTIA certifications?",
-    opts: ["Network+","Security+","CCNA","A+"],
-    correct: [0,1,3]
+    section: "🛡️ Error Detection and Correction",
+    text: "Which of the following are 'Error Detecting Techniques' listed in the file?",
+    opts: [
+      "Single parity check.",
+      "Two-dimensional parity check.",
+      "Checksum.",
+      "Cyclic redundancy check (CRC).",
+    ],
+    correct: [0, 1, 2, 3],
+    rationale:
+      "All four methods (Single parity, 2D parity, Checksum, CRC) are standard error-detecting techniques mentioned in the file.",
   },
   {
-    text: "What are differences between System and Network Administrator (Scope)?",
-    opts: ["Sys Admin focuses on OS, software, servers","Net Admin handles network maintenance","Both do exactly the same tasks","Network Admin manages HR"],
-    correct: [0,1]
+    section: "🛡️ Error Detection and Correction",
+    text: "In 'Single Parity Check', what happens at the receiving end?",
+    opts: [
+      "The parity bit is recalculated from the received data bits.",
+      "It is compared with the received parity bit.",
+      "Data is rejected if the parity doesn't match the expected even total of 1s.",
+      "It is an expensive way to detect errors.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Receiver recalculates parity, compares to received parity bit, and rejects data on mismatch. Single parity is inexpensive (low overhead), not expensive.",
   },
   {
-    text: "Which are Microsoft certification levels?",
-    opts: ["MTA","MCSE","CCNP","MCSA"],
-    correct: [0,1,3]
+    section: "🛡️ Error Detection and Correction",
+    text: "What are the characteristics of a 'Checksum'?",
+    opts: [
+      "It is based on the concept of redundancy.",
+      "The sender calculates a sum and its complement.",
+      "The receiver keeps the data if the final result is zero.",
+      "It organizes data in the form of a table.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Checksum uses redundancy: sender computes sum and complement; receiver checks if final result is zero. Organizing data in a table describes 2D parity, not checksum.",
   },
   {
-    section: "Part 2 — Host, Client, Server & IP Address",
-    text: "Which of the following are examples of Hosts?",
-    opts: ["Laptops","Cloud Servers","Network cables","Smart Watches (IoT)"],
-    correct: [0,1,3]
+    section: "🛡️ Error Detection and Correction",
+    text: "Regarding 'CRC (Cyclic Redundancy Check)':",
+    opts: [
+      "It uses a divisor to generate a remainder.",
+      "Extra 0's added to data are 'one less than the number of bits in the divisor'.",
+      "XOR operation is used during the process.",
+      "The remainder is appended to the Data Packet.",
+    ],
+    correct: [0, 1, 2, 3],
+    rationale:
+      "CRC uses binary division with a divisor, appends (divisor length - 1) zeros, uses XOR operations, and appends the remainder to the packet. All options are correct.",
   },
   {
-    text: "Which correctly describe the Client-Server relationship?",
-    opts: ["Clients initiate requests","Servers respond to requests","Servers initiate requests","Server is a computer with special software"],
-    correct: [0,1,3]
+    section: "🛡️ Error Detection and Correction",
+    text: "How is 'Error Correction' handled according to the text?",
+    opts: [
+      "Backward error correction.",
+      "Forward error correction.",
+      "Hamming Code is a technique used for error correction.",
+      "Only the sender can correct errors.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Error correction is done via backward (retransmission) or forward (receiver corrects) methods; Hamming Code is a forward error correction technique. Receivers can also correct errors.",
   },
   {
-    text: "Which statements about IP Addresses are correct?",
-    opts: ["It is the identity of each host","IPv4 is 32 bits long","Each octet can be 0–512","Represented as 4 octets"],
-    correct: [0,1,3]
+    section: "🛡️ Error Detection and Correction",
+    text: "In 'Hamming Code', how is the error position determined?",
+    opts: [
+      "By recalculating parity bits at the receiving end.",
+      "The decimal value of the recalculated parity bits indicates the error position.",
+      "Redundant bits 'r' are placed in positions like 1, 2, 4, 8... (2^(k-1)).",
+      "It uses the formula 2^r ≥ d + r + 1.",
+    ],
+    correct: [0, 1, 2, 3],
+    rationale:
+      "Hamming Code recalculates parity bits at receiver; the decimal value of these bits gives error position. Redundant bits go at power-of-2 positions (1,2,4,8...), and the formula ensures error correction capability. All options are correct.",
   },
   {
-    text: "What are the two parts of an IP Address?",
-    opts: ["Network Address","Host Address","MAC Address","Port Address"],
-    correct: [0,1]
+    section: "🔗 ARP and Routing Algorithms",
+    text: "What is the primary purpose of 'ARP (Address Resolution Protocol)'?",
+    opts: [
+      "To associate an IP address with a MAC address.",
+      "To identify the actual device using a MAC address.",
+      "To locate a device on the network using an IP address.",
+      "To change the MAC address imprinted on the NIC.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "ARP maps IP addresses to MAC addresses, helping locate devices on a network. ARP does not change the factory-imprinted MAC address on a NIC.",
   },
   {
-    text: "Which are correct about Public IP Address?",
-    opts: ["Has global reach","Assigned by ISP","Only local reach","Assigned by the router"],
-    correct: [0,1]
+    section: "🔗 ARP and Routing Algorithms",
+    text: "Describe the 'ARP process' when the ARP cache is empty:",
+    opts: [
+      "The device broadcasts a message to the entire network.",
+      "Each device is asked for a matching MAC address.",
+      "The matching device responds back with its MAC address.",
+      "The received MAC address is then stored in the ARP cache.",
+    ],
+    correct: [0, 1, 2, 3],
+    rationale:
+      "ARP broadcasts a request; all devices check; the matching device replies with its MAC; the sender stores it in ARP cache. All options describe the correct process.",
   },
   {
-    text: "Which are correct about Private IP Address?",
-    opts: ["Only local reach","Assigned by the router","Used to communicate over the Internet","Used within a private network"],
-    correct: [0,1,3]
+    section: "🔗 ARP and Routing Algorithms",
+    text: "What is the difference between 'Dynamic' and 'Static' ARP entries?",
+    opts: [
+      "Dynamic entries are created automatically.",
+      "Dynamic entries are permanent.",
+      "Static entries are entered manually using a command utility.",
+      "Dynamic entries are removed periodically.",
+    ],
+    correct: [0, 2, 3],
+    rationale:
+      "Dynamic entries are auto-created and temporary (periodically removed). Static entries are manually added and permanent. Dynamic entries are not permanent.",
   },
   {
-    text: "Which Subnet Mask belongs to Class C?",
-    opts: ["255.0.0.0","255.255.0.0","255.255.255.0","255.255.255.255"],
-    correct: [2]
+    section: "🔗 ARP and Routing Algorithms",
+    text: "According to the 'Routing Algorithm' section:",
+    opts: [
+      "Routing is the process of forwarding packets from source to destination.",
+      "The 'best path' is defined as the 'least-cost path'.",
+      "Routing algorithms determine the best route.",
+      "Algorithms are divided into Adaptive and Non-adaptive.",
+    ],
+    correct: [0, 1, 2, 3],
+    rationale:
+      "Routing forwards packets; best path = least-cost; algorithms find best routes and are classified as adaptive or non-adaptive. All options are correct.",
   },
   {
-    text: "Which correctly compare IPv4 vs IPv6?",
-    opts: ["IPv4 = 32 bits, IPv6 = 128 bits","IPv6 supports autoconfiguration","IPv4 was deployed in 1998","IPv6 uses hexadecimal notation"],
-    correct: [0,1,3]
+    section: "🔗 ARP and Routing Algorithms",
+    text: "What defines 'Distance Vector Routing'?",
+    opts: [
+      "Routers use a distributed algorithm to compute routing tables.",
+      "Each router maintains a distance table known as a 'Vector'.",
+      "It is asynchronous and doesn't require all nodes to operate in lock step.",
+      "The process is iterative until no more information is exchanged.",
+    ],
+    correct: [0, 1, 2, 3],
+    rationale:
+      "Distance Vector uses distributed computation, maintains a distance vector table, is asynchronous, and iteratively exchanges info until convergence. All options are correct.",
   },
   {
-    text: "Which correctly describe the MAC Address?",
-    opts: ["Physical address of the device","48 bits long (6 octets)","Can be changed easily like IP","Written in hexadecimal (0–9, A–F)"],
-    correct: [0,1,3]
+    section: "🔗 ARP and Routing Algorithms",
+    text: "What defines 'Link-State Routing'?",
+    opts: [
+      "Routers exchange messages to learn the entire network topology.",
+      "It uses the 'shortest path computation' for the routing table.",
+      "Each router shares knowledge of its neighborhood with all other routers.",
+      "It is the second family of routing protocols.",
+    ],
+    correct: [0, 1, 2, 3],
+    rationale:
+      "Link-State routers learn full topology via flooding, compute shortest paths (Dijkstra), share neighborhood info with all, and represent the second major routing family. All options are correct.",
   },
   {
-    text: "The MAC Address consists of two parts. Which are they?",
-    opts: ["Vendor code (first 3 octets)","Unique number (last 3 octets)","Network address","Subnet mask"],
-    correct: [0,1]
+    section: "🔗 ARP and Routing Algorithms",
+    text: "Compare Distance Vector (DV) vs. Link State (LS) based on the table:",
+    opts: [
+      "DV convergence is slow, while LS is fast.",
+      "DV configuration is easy, while LS is difficult.",
+      "DV knows the entire topology, but LS does not.",
+      "DV uses the Bellman-Ford (Bredford) algorithm; LS uses Dijkstra.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "DV: slow convergence, easy config, Bellman-Ford algorithm. LS: fast convergence, harder config, Dijkstra's algorithm. LS knows full topology; DV only knows neighbors' distances.",
   },
   {
-    section: "Part 3 — Common Network Commands",
-    text: "What does the 'ping' command do?",
-    opts: ["Tests reachability of a device","Shows packet loss statistics","Displays MAC address","Traces the full route"],
-    correct: [0,1]
+    section: "🔗 ARP and Routing Algorithms",
+    text: "Which metrics are used by routing protocols to determine the best path?",
+    opts: ["Hop count.", "Delay.", "Bandwidth.", "Cost."],
+    correct: [0, 1, 2, 3],
+    rationale:
+      "Routing protocols commonly use hop count, delay, bandwidth, and cost (or composite metrics) to determine the best path. All options are valid metrics.",
   },
-  {
-    text: "Which commands display IP address information?",
-    opts: ["ipconfig","ipconfig /all","getmac","hostname"],
-    correct: [0,1]
-  },
-  {
-    text: "Which are correct about 'tracert'?",
-    opts: ["Traces the route a packet takes","Shows each hop along the route","Shows your MAC address","Renews your IP address"],
-    correct: [0,1]
-  },
-  {
-    text: "What does 'nslookup' do?",
-    opts: ["Shows DNS server being used","Resolves domain names to IPs","Pings a device","Shows system hardware info"],
-    correct: [0,1]
-  },
-  {
-    text: "Which are correct about the DNS system?",
-    opts: ["Translates domain names to IPs","Called the 'phonebook of the Internet'","Assigns MAC addresses","Only works with IPv6"],
-    correct: [0,1]
-  },
-  {
-    text: "What are the ipconfig parameters and their correct descriptions?",
-    opts: ["/all → full TCP/IP configuration","/release → releases IPv4 address","/renew → deletes all network settings","/renew → renews IPv4 address"],
-    correct: [0,1,3]
-  },
-  {
-    text: "What does 'arp -a' display?",
-    opts: ["IP to MAC address mappings","The ARP cache table","Your public IP address","The name of the computer"],
-    correct: [0,1]
-  },
-  {
-    text: "Which commands give information about your computer's identity on the network?",
-    opts: ["hostname","systeminfo","getmac","tracert"],
-    correct: [0,1,2]
-  },
-  {
-    text: "'pathping' compared to 'ping' and 'tracert':",
-    opts: ["Provides more detailed statistics","Reports on packet loss per hop","Less detailed than ping","Includes latency reports"],
-    correct: [0,1,3]
-  },
-  {
-    text: "Which correctly describe what 'systeminfo' shows?",
-    opts: ["OS name and version","Network card information","Only shows MAC address","System manufacturer and model"],
-    correct: [0,1,3]
-  }
 ];
+
 
 const labels = ['A','B','C','D'];
 let state = questions.map(() => ({ selected: new Set(), submitted: false }));
