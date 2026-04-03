@@ -543,337 +543,427 @@
       // ============================================
       // PART 3: Network Types and Architectures - 30 Questions
       // ============================================
-      const questions = [
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "Which network architecture treats all connected computers as equals, with no central server?",
-          opts: [
-            "Client-Server Network",
-            "Peer-To-Peer Network",
-            "Mainframe Network",
-            "Storage Area Network",
-          ],
-          correct: [1],
-          rationale:
-            "In a P2P architecture, every computer has equal status and can act as both a client and a server. 💻🤝💻",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "What is the typical maximum range for a Personal Area Network (PAN)?",
-          opts: ["1 meter", "10 meters", "100 meters", "1 kilometer"],
-          correct: [1],
-          rationale:
-            "A PAN is designed for an individual person, typically spanning a range of about 10 meters. 📏",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "Which network type would most likely be used to connect computers within a single office building?",
-          opts: ["WAN", "MAN", "LAN", "SAN"],
-          correct: [2],
-          rationale:
-            "A Local Area Network (LAN) is designed for small areas like buildings or offices. 🏢",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "Who is the primary user of Metropolitan Area Networks (MAN) to connect to citizens and industries?",
-          opts: [
-            "Individual home users",
-            "Government agencies",
-            "Small startups",
-            "International space stations",
-          ],
-          correct: [1],
-          rationale:
-            "Government agencies use MANs to interconnect LANs across a city to reach citizens. 🏙️",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "What is considered the largest Wide Area Network (WAN) in the world?",
-          opts: [
-            "A corporate Intranet",
-            "The Internet",
-            "A university campus network",
-            "The City of New York network",
-          ],
-          correct: [1],
-          rationale:
-            "The Internet is the global system of interconnected networks, making it the largest WAN. 🌍",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "Which of these is a defining characteristic of a Storage Area Network (SAN)?",
-          opts: [
-            "It connects devices via satellite links only.",
-            "Storage devices appear as if they are locally attached to the host.",
-            "It is used for low-speed personal data transfers.",
-            "It only works over a range of 10 meters.",
-          ],
-          correct: [1],
-          rationale:
-            "A SAN presents storage to a host so it seems like a local hard drive. 💾",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "In a Client-Server network, what is the role of the 'Client'?",
-          opts: [
-            "Providing resources to all other nodes",
-            "Managing the network security protocols",
-            "Requesting services or data from the server",
-            "Storing all corporate data locally",
-          ],
-          correct: [2],
-          rationale:
-            "Clients are the workstations that use the services provided by the central server. 📡",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "Which network type connects several LANs to form a larger network spanning a city?",
-          opts: ["PAN", "LAN", "MAN", "WAN"],
-          correct: [2],
-          rationale:
-            "MAN (Metropolitan Area Network) interconnects different LANs within a city area. 🏘️",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "A network covering multiple buildings within a University is typically called a...?",
-          opts: ["PAN", "CAN", "WAN", "Nano Network"],
-          correct: [1],
-          rationale:
-            "A Campus Area Network (CAN) is used for specific sites like universities or large corporate bases. 🎓",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "Which transmission mode allows data to flow in only one direction?",
-          opts: ["Half-Duplex", "Full-Duplex", "Simplex", "Multi-Duplex"],
-          correct: [2],
-          rationale:
-            "Simplex mode is unidirectional; data flows in one fixed direction. ➡️",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "A walkie-talkie, where only one person can speak at a time, is an example of which mode?",
-          opts: ["Simplex", "Half-Duplex", "Full-Duplex", "Fixed-Duplex"],
-          correct: [1],
-          rationale:
-            "In half-duplex, both can transmit and receive, but not simultaneously. 📻",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "Which of the following describes 'Full-Duplex' mode?",
-          opts: [
-            "Communication is strictly unidirectional.",
-            "Messages flow in both directions, but not at the same time.",
-            "Stations can send and receive messages simultaneously.",
-            "Communication only happens from the server to the client.",
-          ],
-          correct: [2],
-          rationale:
-            "Full-duplex allows bi-directional communication at the same time, like a phone call. 📞",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "What is the term for the physical or logical arrangement of nodes and connecting lines in a network?",
-          opts: [
-            "Network Architecture",
-            "Network Topology",
-            "Network Protocol",
-            "Network Segment",
-          ],
-          correct: [1],
-          rationale:
-            "Topology refers to the geometric arrangement of the network components. 📐",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "In which topology is every node connected to exactly two other nodes, forming a single continuous path for signals?",
-          opts: [
-            "Star Topology",
-            "Bus Topology",
-            "Ring Topology",
-            "Mesh Topology",
-          ],
-          correct: [2],
-          rationale:
-            "In a Ring topology, devices are connected in a circular fashion. ⭕",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "Which topology uses a central hub or switch to which all other devices are connected?",
-          opts: [
-            "Mesh Topology",
-            "Star Topology",
-            "Line Topology",
-            "Tree Topology",
-          ],
-          correct: [1],
-          rationale:
-            "The Star topology features a central 'hub' that distributes data to all nodes. ⭐",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "Which transmission medium is commonly mentioned for connecting LANs?",
-          opts: [
-            "Satellite links",
-            "Twisted pair or Coaxial cable",
-            "Microwave towers",
-            "Deep-sea cables",
-          ],
-          correct: [1],
-          rationale:
-            "LANs commonly use physical cables like twisted pair for short-distance connections. 🧵",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "According to the hierarchy summary, which network is smaller than a LAN but larger than a BAN?",
-          opts: ["WAN", "MAN", "PAN", "CAN"],
-          correct: [2],
-          rationale: "Based on the hierarchy: Nano -> BAN -> PAN -> LAN. 📱",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "What does 'WAN' stand for?",
-          opts: [
-            "Wireless Area Network",
-            "Wide Area Network",
-            "Web Area Network",
-            "Workstation Access Network",
-          ],
-          correct: [1],
-          rationale:
-            "WAN stands for Wide Area Network, covering large geographic regions. 🗺️",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "Which topology offers the highest redundancy because every node has a point-to-point link to every other node?",
-          opts: ["Star", "Bus", "Fully Connected / Mesh", "Ring"],
-          correct: [2],
-          rationale:
-            "Mesh/Fully Connected ensures multiple paths between all nodes, making it very reliable. 🕸️",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "A network in your home connecting your laptop, phone, and smart TV is most accurately a...?",
-          opts: ["WAN", "MAN", "LAN", "CAN"],
-          correct: [2],
-          rationale:
-            "A home network is a classic example of a small Local Area Network. 🏠",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "In a Peer-to-Peer network, where is the responsibility for security and data backup located?",
-          opts: [
-            "With the Central Administrator",
-            "On the primary server node",
-            "With each individual user on their own machine",
-            "Stored in the cloud automatically",
-          ],
-          correct: [2],
-          rationale:
-            "In P2P, there is no central server, so users are responsible for their own data. 👤",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "Which network type spans across states or even different countries?",
-          opts: ["LAN", "MAN", "WAN", "PAN"],
-          correct: [2],
-          rationale:
-            "WAN covers large geographical areas like states and nations. 🌎",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "What does 'SAN' stand for in the context of high-speed data access?",
-          opts: [
-            "System Area Network",
-            "Storage Area Network",
-            "Secure Area Network",
-            "Server Access Network",
-          ],
-          correct: [1],
-          rationale:
-            "SAN is a specialized network for storage device access. 🗄️",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "Which topology resembles a hierarchy, often described as a collection of star networks?",
-          opts: [
-            "Mesh Topology",
-            "Tree Topology",
-            "Bus Topology",
-            "Ring Topology",
-          ],
-          correct: [1],
-          rationale:
-            "Tree topology has a hierarchical structure with branches. 🌳",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "The Internet backbone often uses fiber optic cables to connect different parts of a WAN. Why?",
-          opts: [
-            "They are cheaper than copper cables.",
-            "They allow for high-speed data transmission over long distances.",
-            "They only work for Simplex communication.",
-            "They are required for PAN connections.",
-          ],
-          correct: [1],
-          rationale:
-            "Fiber optics provide immense bandwidth and low signal loss over thousands of miles. ⚡",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "A network that connects all branches of a large bank within a single city is a...?",
-          opts: ["LAN", "MAN", "PAN", "Nano Network"],
-          correct: [1],
-          rationale:
-            "A Metropolitan Area Network (MAN) is perfect for city-wide corporate connections. 🏦",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "Which architecture is most suitable for a very small office where users want to share a single printer easily?",
-          opts: [
-            "Complex Client-Server",
-            "Peer-To-Peer (P2P)",
-            "Wide Area Network",
-            "Simplex Network",
-          ],
-          correct: [1],
-          rationale:
-            "P2P is easy to set up and cost-effective for small groups sharing resources. 🖨️",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "What is a 'Workstation' in the context of the Client-Server diagrams?",
-          opts: [
-            "The main computer that stores all data",
-            "An individual computer used by a person to access the network",
-            "A specialized device for storage only",
-            "The router that connects to the internet",
-          ],
-          correct: [1],
-          rationale:
-            "Workstations (or clients) are the endpoints where users do their work. 💻",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "Which of these is the smallest network type mentioned in the hierarchy summary?",
-          opts: ["PAN", "BAN", "Nano", "LAN"],
-          correct: [2],
-          rationale:
-            "'Nano' is the smallest level shown in the summary hierarchy of the lecture. 🔬",
-        },
-        {
-          section: "🌐 Network Types & Architectures",
-          text: "Which transmission mode is bidirectional but only one way at a time?",
-          opts: [
-            "Simplex",
-            "Half-Duplex",
-            "Full-Duplex",
-            "Simultaneous-Duplex",
-          ],
-          correct: [1],
-          rationale:
-            "Half-duplex allows communication in both directions, but not simultaneously. 🔄",
-        },
-      ];
+    const questions = [
+  {
+    section: "🔌 Network Topologies",
+    text: "Which of the following are types of 'Physical Topologies' mentioned in the lecture?",
+    opts: [
+      "Bus Topology",
+      "Star Topology",
+      "Mesh Topology",
+      "Cloud Topology",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Bus, Star, and Mesh are fundamental physical topologies. 'Cloud Topology' is not a standard physical topology but rather a representation of external networks (like the internet). ☁️",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "What are the main characteristics of a 'Bus Topology'?",
+    opts: [
+      "All nodes are connected to a single central cable (Backbone).",
+      "It uses 'Terminators' at both ends of the main cable.",
+      "If the central cable fails, the entire network goes down.",
+      "Every device is connected to every other device directly.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Bus topology uses a single backbone cable with terminators to prevent signal reflection. A cable failure brings down the whole network. Direct device-to-device connections describe Mesh topology, not Bus. 🚌",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "Regarding 'Star Topology', which statements are correct?",
+    opts: [
+      "All devices are connected to a central controller called a Hub or Switch.",
+      "It is easy to install and reconfigure.",
+      "If one device's cable fails, only that device is affected.",
+      "It requires less cabling than a Bus topology.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Star topology uses a central hub/switch, making installation easy and isolating cable failures. However, it requires MORE cabling than Bus topology (each device has its own cable to the hub), not less. ⭐",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "Why is 'Mesh Topology' considered highly reliable?",
+    opts: [
+      "Every node has a dedicated point-to-point link to every other node.",
+      "It offers 'Fault Tolerance'; if one link fails, data can take another path.",
+      "It is very cheap and easy to install.",
+      "It provides high privacy and security because messages travel on dedicated lines.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "Mesh topology is reliable due to dedicated links and fault tolerance (multiple paths). It provides privacy since messages use dedicated lines. However, it is EXPENSIVE and DIFFICULT to install, not cheap/easy. 🕸️",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "Which of the following are 'Disadvantages' of Mesh Topology?",
+    opts: [
+      "High amount of cabling required.",
+      "Difficult installation and reconfiguration.",
+      "The hardware (I/O ports) required is expensive.",
+      "If the central hub fails, the whole network stops.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Mesh topology requires extensive cabling, many I/O ports, and is difficult to install/reconfigure. Central hub failure is a disadvantage of Star topology, not Mesh (Mesh has no central hub). 🔌",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "Select the correct descriptions for 'Ring' and 'Hybrid' topologies:",
+    opts: [
+      "In Ring topology, each computer is connected to the next, forming a circle.",
+      "In Ring topology, a break in the ring can disable the entire network.",
+      "Hybrid topology is a combination of two or more different topologies.",
+      "A Tree topology is an example of a Hybrid topology.",
+    ],
+    correct: [0, 1, 2, 3],
+    rationale:
+      "Ring topology forms a circle where a break disables the network. Hybrid combines topologies (Tree = Star + Bus). All statements are correct. 💍🔀",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "In a Bus Topology, what is the role of the 'Terminator'?",
+    opts: [
+      "It amplifies the signal to reach further.",
+      "It is placed at the end of the cable to prevent signal reflection.",
+      "It connects the PC to the backbone cable.",
+      "It identifies the destination of the data.",
+    ],
+    correct: [1],
+    rationale:
+      "Terminators absorb signals at cable ends, preventing reflections that would cause interference. They don't amplify, connect PCs, or identify destinations. 🛑",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "Which topology requires the formula n(n-1)/2 to calculate the number of physical links for n devices?",
+    opts: ["Star Topology", "Mesh Topology", "Bus Topology", "Ring Topology"],
+    correct: [1],
+    rationale:
+      "In full mesh topology, each device connects to every other device. For n devices: each of n devices needs (n-1) connections, but each link counted twice → n(n-1)/2. 📐",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "In a Mesh topology, if you have 10 devices, which of the following is true about the network structure?",
+    opts: [
+      "The number of physical links required is 45.",
+      "Each device must have 9 Input/Output (I/O) ports.",
+      "Every node has a dedicated point-to-point link to every other node.",
+      "It uses a central hub to manage the 10 devices.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "For 10 devices in full mesh: links = 10×9/2 = 45; each device needs 9 I/O ports. Mesh has NO central hub (that's Star topology). 🔢",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "Which of these are considered 'Disadvantages' specifically for Bus and Star topologies according to the lecture?",
+    opts: [
+      "In Bus: A fault or break in the bus cable stops all transmission.",
+      "In Star: If the hub fails, the whole system is dead.",
+      "In Star: It requires more cabling than a Bus topology.",
+      "In Mesh: It provides high privacy and security.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Bus: single point of failure (backbone cable). Star: hub failure kills network, and Star needs MORE cabling than Bus. Mesh's privacy/security is an advantage, not a disadvantage. ⚠️",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "Analyze the 'Ring Topology' characteristics mentioned in the file:",
+    opts: [
+      "Each device is incorporated with a repeater.",
+      "A signal is passed along the ring in one direction only.",
+      "A break in the ring can disable the entire network.",
+      "It is much more reliable than a Mesh topology.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Ring topology uses repeaters at each device, unidirectional traffic, and breaks disable the network. Mesh is MORE reliable (fault-tolerant) than Ring, not less. 💍",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "Why is 'Mesh Topology' described as having high privacy and security?",
+    opts: [
+      "Because every message travels along a dedicated line.",
+      "Because only the intended recipient sees the data.",
+      "Because it uses a central controller to filter data.",
+      "Because it is easy to monitor all traffic in one cable.",
+    ],
+    correct: [0, 1],
+    rationale:
+      "In Mesh, dedicated point-to-point links mean messages are not broadcasted. Only sender and recipient see the data. Central controllers and single-cable monitoring describe other topologies. 🔒",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "In the context of Topologies, 'Hybrid' means:",
+    opts: [
+      "Combining two or more different topologies (e.g., Star and Bus).",
+      "A network that only uses wireless connections.",
+      "A structure that can change its shape automatically.",
+      "An example is a Tree topology which combines multiple Star topologies.",
+    ],
+    correct: [0, 3],
+    rationale:
+      "Hybrid = combination of two+ topologies. Tree topology (Star + Bus) is a classic example. Wireless-only or self-changing shapes are not definitions of hybrid. 🌳🔀",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "Based on the 'Mesh Topology' section, what are the specific advantages mentioned?",
+    opts: [
+      "Each connection can carry its own data load (eliminating traffic problems).",
+      "If one link becomes unusable, it does not incapacitate the entire system.",
+      "It is the most economical topology in terms of cabling.",
+      "It provides high privacy and security.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "Mesh advantages: dedicated links (no traffic jams), fault tolerance, and privacy/security. Mesh is the LEAST economical (most cabling), not most economical. 💰❌",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "According to the 'Bus Topology' description, which components are essential for its setup?",
+    opts: [
+      "A central controller or Hub.",
+      "A single central cable called a 'Backbone'.",
+      "Tap and Drop lines to connect nodes to the main cable.",
+      "Terminators at both ends of the backbone.",
+    ],
+    correct: [1, 2, 3],
+    rationale:
+      "Bus requires: backbone cable, taps/drop lines for connections, and terminators. A central hub is for Star topology, NOT Bus. 🚌",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "What are the 'Disadvantages' of Star Topology as stated in the file?",
+    opts: [
+      "It requires more cabling than a Bus topology.",
+      "If the central hub fails, the whole system is dead.",
+      "It is very difficult to install and reconfigure.",
+      "Adding or removing devices is a complex process.",
+    ],
+    correct: [0, 1],
+    rationale:
+      "Star disadvantages: more cabling than Bus, and hub is a single point of failure. Star is actually EASY to install/reconfigure (just connect to hub), and adding/removing devices is simple. ⭐⚠️",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "What is true about 'Ring Topology' based on the text?",
+    opts: [
+      "Each device is incorporated with a repeater.",
+      "A signal is passed along the ring in one direction only, from device to device.",
+      "It is easy to install and reconfigure.",
+      "A break in the ring can disable the entire network.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "Ring uses repeaters at each device, unidirectional traffic, and breaks disable the network. Ring is NOT easy to reconfigure (compared to Star). 💍",
+  },
+  {
+    section: "🔌 Network Topologies vs. Logic",
+    text: "Based on the summary of 'Network Topology', what does 'Logical Topology' refer to?",
+    opts: [
+      "The physical layout of cables.",
+      "How data actually flows through the network.",
+      "The way in which the network appears to the devices that use it.",
+      "The type of Hub or Switch used.",
+    ],
+    correct: [1, 2],
+    rationale:
+      "Logical topology = how data flows and how the network appears to devices (vs. physical layout of cables). 🧠",
+  },
+  {
+    section: "🔌 Physical vs. Logical Topology",
+    text: "Based on the 'Physical vs. Logical Topology' section, which of these statements are correct?",
+    opts: [
+      "Physical topology refers to the actual layout of the cables and devices.",
+      "Logical topology defines how the media is accessed by the hosts.",
+      "Logical topology refers to the way in which the network appears to the devices that use it.",
+      "Physical and Logical topologies must always be the same shape.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Physical = actual cable/device layout. Logical = media access and how network appears. They can DIFFER (e.g., physical Star but logical Bus). 📡",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "In a 'Bus Topology', how are nodes physically connected to the backbone?",
+    opts: [
+      "Using a central Hub.",
+      "Through 'Drop lines', which are the connection between the device and the main cable.",
+      "Using a 'Tap', which is a connector that punctures the main cable to create a contact.",
+      "Directly by plugging the backbone into the computer's NIC.",
+    ],
+    correct: [1, 2],
+    rationale:
+      "Bus uses Drop lines (from device to cable) and Taps (connectors that pierce the cable). Hubs are for Star; direct backbone-to-NIC is impractical. 🔌",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "What are the specific disadvantages of 'Ring Topology' mentioned in the file?",
+    opts: [
+      "A break in the ring (such as a disabled station) can disable the entire network.",
+      "It is highly complex and requires more cabling than a Mesh.",
+      "Unidirectional traffic means a signal can only travel in one direction.",
+      "It is difficult to install and reconfigure compared to Star.",
+    ],
+    correct: [0, 3],
+    rationale:
+      "Ring disadvantages: break disables network, harder install/reconfigure than Star. Mesh uses MORE cabling than Ring (not less), and unidirectional traffic is a characteristic, not strictly a disadvantage. 💍⚠️",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "In 'Mesh Topology', the file states that it provides 'Fault Tolerance'. This means:",
+    opts: [
+      "If one link becomes unusable, it does not incapacitate the entire system.",
+      "The system automatically fixes the broken cable.",
+      "Traffic can still flow through other available dedicated links.",
+      "It is impossible for the network to ever fail.",
+    ],
+    correct: [0, 2],
+    rationale:
+      "Fault tolerance = multiple paths allow traffic to reroute around failures. Mesh does NOT auto-fix cables, and failures can still occur (just not catastrophic). 🛡️",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "Which topology is described as having 'Easy installation and reconfiguration' because devices are only connected to a central controller?",
+    opts: ["Mesh Topology", "Star Topology", "Bus Topology", "Hybrid Topology"],
+    correct: [1],
+    rationale:
+      "Star topology: just connect each device to the central hub/switch → easy install and reconfiguration. ⭐🔧",
+  },
+  {
+    section: "📡 Data Transmission Modes",
+    text: "In 'Half-Duplex' mode, what happens when two devices try to send data at the exact same time?",
+    opts: [
+      "Both devices can send and receive simultaneously without any issues.",
+      "It is like a one-lane road; one must wait for the other to finish.",
+      "The channel capacity is shared equally for simultaneous two-way traffic.",
+      "Each station can both transmit and receive, but not at the same time.",
+    ],
+    correct: [1, 3],
+    rationale:
+      "Half-Duplex allows transmission in both directions but NOT simultaneously (like a walkie-talkie or one-lane bridge). Simultaneous two-way is Full-Duplex. 🔄",
+  },
+  {
+    section: "📡 Data Transmission Modes",
+    text: "Which of the following are examples or characteristics of 'Full-Duplex' mode?",
+    opts: [
+      "It is like a two-way street with traffic flowing in both directions at the same time.",
+      "The capacity of the link is shared between signals going in opposite directions.",
+      "A telephone network where both parties can talk and listen at once.",
+      "Communication is unidirectional and only goes in one direction.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Full-Duplex = simultaneous two-way communication (telephone, two-way street). Unidirectional is Simplex mode. 📞🔄",
+  },
+  {
+    section: "📡 Data Transmission Modes",
+    text: "'Simplex' mode is described as being like a one-way street. Which statements support this?",
+    opts: [
+      "Only one of the two devices on a link can transmit.",
+      "The other device can only receive.",
+      "The entire capacity of the channel is used to send data in one direction.",
+      "It is used in systems like Walkie-talkies.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Simplex = one-way only (radio broadcast, TV). Walkie-talkies are Half-Duplex (both can talk but not simultaneously). 📻➡️",
+  },
+  {
+    section: "🌐 Network Types",
+    text: "What are the specific details provided for a 'Metropolitan Area Network (MAN)'?",
+    opts: [
+      "It interconnects different LANs to form a larger network.",
+      "It covers a larger geographic area than a LAN (like a city).",
+      "It is primarily used for private use within a 10-meter range.",
+      "Government agencies use it to connect to citizens and private industries.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "MAN connects LANs across a city-sized area (used by governments, ISPs). 10-meter range describes PAN, not MAN. 🏙️",
+  },
+  {
+    section: "🌐 Network Types",
+    text: "According to the file, a 'Wide Area Network (WAN)' is characterized by:",
+    opts: [
+      "Spanning over a large geographical area such as a state or country.",
+      "Being limited to a single office building.",
+      "Using communication mediums like telephone lines, fiber optic cables, or satellite links.",
+      "The Internet is one of the biggest WANs in the world.",
+    ],
+    correct: [0, 2, 3],
+    rationale:
+      "WAN spans large areas (states/countries), uses various long-distance media, and the Internet is the ultimate WAN. Single office building describes LAN. 🌍",
+  },
+  {
+    section: "🌐 Network Types",
+    text: "Match the network type with its correct description from the text:",
+    opts: [
+      "PAN: Range is typically within 10 meters.",
+      "LAN: Connects devices in a small area like a building or office.",
+      "SAN: Used for specialized high-speed storage.",
+      "CAN: Covers a specific geographical area like a university campus.",
+    ],
+    correct: [0, 1, 2, 3],
+    rationale:
+      "PAN (10m personal), LAN (building/office), SAN (storage network), CAN (campus area). All are correctly matched! 🎯",
+  },
+  {
+    section: "🏗️ Network Architectures",
+    text: "What are the advantages or features of a 'Peer-To-Peer' (P2P) network?",
+    opts: [
+      "Every computer has the same status.",
+      "Each node can act as both a client and a server.",
+      "It requires a powerful central server to manage all data.",
+      "There is no central point of control.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "P2P = equal nodes (both client/server), no central control. Central server describes Client-Server architecture, not P2P. 👥",
+  },
+  {
+    section: "🏗️ Network Architectures",
+    text: "In a 'Client-Server' architecture, what is the role of the 'Server'?",
+    opts: [
+      "It is a central computer used to provide resources to other computers.",
+      "It is a device that only requests services from other nodes.",
+      "It has more power and storage than the client computers.",
+      "It performs all the network's processing and resource management.",
+    ],
+    correct: [0, 2, 3],
+    rationale:
+      "Server = central resource provider, more powerful, manages network. Clients request services, servers provide them. 🖥️→💻",
+  },
+  {
+    section: "🔌 Physical vs. Logical Topology",
+    text: "The file mentions that 'Network Topology' can be viewed in two ways. What are they?",
+    opts: [
+      "Physical Topology: The actual layout of the computer cables and other network devices.",
+      "Logical Topology: The way in which the network appears to the devices that use it.",
+      "Logical Topology: How data actually flows through the network.",
+      "Virtual Topology: The way the internet looks to a user.",
+    ],
+    correct: [0, 1, 2],
+    rationale:
+      "Two views: Physical (cable/device layout) and Logical (data flow and network appearance). 'Virtual Topology' is not a standard term here. 👁️",
+  },
+  {
+    section: "🔌 Network Topologies",
+    text: "Which statements are true regarding 'Bus Topology' hardware connections?",
+    opts: [
+      "Nodes are connected to the backbone by 'Drop lines'.",
+      "A 'Tap' is a connector that creates contact with the metallic core of the cable.",
+      "It uses a central hub to connect every PC.",
+      "As a signal travels along the backbone, some of its energy is transformed into heat.",
+    ],
+    correct: [0, 1, 3],
+    rationale:
+      "Bus uses Drop lines + Taps (pierce cable core). Signal energy loss (heat) occurs along the cable. Central hub is for Star topology. 🚌🔌",
+  },
+];
 
       const labels = ["A", "B", "C", "D"];
       let state = questions.map(() => ({
